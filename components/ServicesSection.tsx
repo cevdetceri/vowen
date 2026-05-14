@@ -8,6 +8,7 @@ const services = [
     Icon: Calendar,
     title: "Appointments",
     id: "appointments",
+    href: "/appointments",
     description:
       "Visit our studio for a private consultation. Try on pieces from our full collection and receive personalised styling advice from our team.",
     cta: "Book Appointment",
@@ -16,6 +17,7 @@ const services = [
     Icon: Sparkles,
     title: "Bespoke",
     id: "bespoke",
+    href: "/bespoke",
     description:
       "Have something unique in mind? Work with us to design a one-of-a-kind piece crafted around your vision, from sketch to finished accessory.",
     cta: "Enquire Now",
@@ -24,6 +26,7 @@ const services = [
     Icon: Tag,
     title: "Rental",
     id: "rental",
+    href: "/rental",
     description:
       "Borrow your dream accessory for your big day. Our rental service gives you access to our full collection at a fraction of the purchase price.",
     cta: "View Rental",
@@ -59,7 +62,7 @@ export default function ServicesSection() {
         </div>
 
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-[#e5e0d8]">
-          {services.map(({ Icon, title, id, description, cta }, i) => (
+          {services.map(({ Icon, title, id, href, description, cta }, i) => (
             <div
               key={title}
               id={id}
@@ -81,7 +84,7 @@ export default function ServicesSection() {
                 {description}
               </p>
               <a
-                href={`#${id}`}
+                href={href}
                 className="text-[11px] tracking-[0.2em] uppercase font-inter text-[#1e1e1e] border-b border-[#1e1e1e] pb-0.5 hover:text-[#b89a72] hover:border-[#b89a72] transition-colors"
               >
                 {cta}

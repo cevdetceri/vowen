@@ -2,22 +2,31 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingBag, Search, Menu, X, ChevronDown } from "lucide-react";
 
 const shopCategories = [
-  "Earrings",
-  "Veils",
-  "Neck Scarves & Bows",
-  "Headbands",
-  "Hairvines",
-  "Haircombs",
-  "Hairpins",
-  "The Bridal Bag",
+  { label: "Earrings", href: "/earrings-1" },
+  { label: "Veils", href: "/veils" },
+  { label: "Neck Scarves & Bows", href: "/neck-scarves-bows" },
+  { label: "Headbands", href: "/collection?category=Headbands" },
+  { label: "Hairvines", href: "/collection?category=Hairvines" },
+  { label: "Haircombs", href: "/collection?category=Haircombs" },
+  { label: "Hairpins", href: "/collection?category=Hairpins" },
+  { label: "The Bridal Bag", href: "/the-bridal-bag" },
+];
+
+const mainLinks = [
+  { label: "Appointments", href: "/appointments" },
+  { label: "Bespoke", href: "/bespoke" },
+  { label: "Rental", href: "/rental" },
+  { label: "Contact Us", href: "/contact-us" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -27,129 +36,166 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111111] text-white">
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-6 md:px-10 h-[60px]">
-          {/* Left: hamburger (mobile) + shop dropdown (desktop) */}
-          <div className="flex items-center gap-6">
+        <div className="flex items-center justify-between px-5 md:px-10 h-[64px]">
+
+          {/* Left: hamburger (mobile) / nav links (desktop) */}
+          <div className="flex items-center gap-7 flex-1">
+            {/* Mobile hamburger */}
             <button
-              onClick={() => setMobileOpen((o) => !o)}
-              className="md:hidden p-1"
-              aria-label="Toggle menu"
+              onClick={() => setMobileOpen(true)}
+              className="md:hidden p-1 hover:text-[#b89a72] transition-colors"
+              aria-label="Open menu"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <Menu className="w-5 h-5" />
             </button>
 
-            {/* Desktop nav */}
+            {/* Desktop nav links */}
             <div className="hidden md:flex items-center gap-7">
-              <div className="relative group">
-                <button
-                  className="flex items-center gap-1 text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
-                  onMouseEnter={() => setShopOpen(true)}
-                  onMouseLeave={() => setShopOpen(false)}
-                >
+              {/* Shop dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setShopOpen(true)}
+                onMouseLeave={() => setShopOpen(false)}
+              >
+                <button className="flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors h-[64px]">
                   Shop <ChevronDown className="w-3 h-3" />
                 </button>
-                {shopOpen && (
-                  <div
-                    className="absolute top-full left-0 pt-4"
-                    onMouseEnter={() => setShopOpen(true)}
-                    onMouseLeave={() => setShopOpen(false)}
-                  >
-                    <div className="bg-[#111] border border-white/10 min-w-[200px] py-3">
-                      {shopCategories.map((cat) => (
-                        <a
-                          key={cat}
-                          href="#shop"
-                          className="block px-5 py-2 text-[11px] tracking-[0.15em] uppercase text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-inter"
-                        >
-                          {cat}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-              {["Appointments", "Bespoke", "Rental"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+                <div
+                  className={`absolute top-full left-0 transition-all duration-200 ${
+                    shopOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+                  }`}
                 >
-                  {item}
+                  <div className="bg-[#1a1a1a] border border-white/10 min-w-[220px] py-2 shadow-xl">
+                    {shopCategories.map((cat) => (
+                      <a
+                        key={cat.label}
+                        href={cat.href}
+                        className="block px-5 py-2.5 text-[11px] tracking-[0.15em] uppercase text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-inter"
+                      >
+                        {cat.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {mainLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+                >
+                  {link.label}
                 </a>
               ))}
-              <a
-                href="#contact"
-                className="text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
-              >
-                Contact Us
-              </a>
             </div>
           </div>
 
           {/* Centre: logo */}
-          <Link
-            href="/"
-            className="absolute left-1/2 -translate-x-1/2 font-cormorant text-[22px] md:text-[26px] font-light tracking-[0.35em] uppercase hover:text-[#b89a72] transition-colors"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            GAMZE
+          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            {!logoError ? (
+              <Image
+                src="/vowen-logo.png"
+                alt="VOWEN"
+                width={110}
+                height={36}
+                className="invert brightness-200 object-contain max-h-[36px]"
+                onError={() => setLogoError(true)}
+                priority
+              />
+            ) : (
+              <span
+                className="font-light tracking-[0.3em] uppercase text-[20px] hover:text-[#b89a72] transition-colors"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                VOWEN
+              </span>
+            )}
           </Link>
 
           {/* Right: search + bag */}
-          <div className="flex items-center gap-4">
-            <button aria-label="Search" className="hover:text-[#b89a72] transition-colors">
-              <Search className="w-[18px] h-[18px]" />
-            </button>
-            <button aria-label="Shopping bag" className="hover:text-[#b89a72] transition-colors">
-              <ShoppingBag className="w-[18px] h-[18px]" />
-            </button>
+          <div className="flex items-center gap-4 flex-1 justify-end">
+            <a href="/search" aria-label="Search" className="hover:text-[#b89a72] transition-colors">
+              <Search className="w-[17px] h-[17px]" />
+            </a>
+            <a href="/cart" aria-label="Shopping bag" className="hover:text-[#b89a72] transition-colors">
+              <ShoppingBag className="w-[17px] h-[17px]" />
+            </a>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile full-screen drawer */}
+      {/* Backdrop */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
-          mobileOpen ? "pointer-events-auto" : "pointer-events-none"
+        onClick={() => setMobileOpen(false)}
+        className={`fixed inset-0 z-[60] bg-black/50 md:hidden transition-opacity duration-300 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Drawer panel */}
+      <div
+        className={`fixed top-0 left-0 bottom-0 z-[70] w-[80vw] max-w-[320px] bg-[#111111] flex flex-col md:hidden transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div
-          className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-            mobileOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setMobileOpen(false)}
-        />
-        <div
-          className={`absolute top-[60px] left-0 right-0 bg-[#111] border-t border-white/10 transition-all duration-300 ${
-            mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
-          }`}
-        >
-          <div className="px-6 py-6 flex flex-col gap-1">
-            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-2 font-inter">Shop</p>
+        {/* Drawer header */}
+        <div className="flex items-center justify-between px-5 h-[64px] border-b border-white/10 shrink-0">
+          <span
+            className="text-white font-light tracking-[0.3em] uppercase text-[18px]"
+            style={{ fontFamily: "var(--font-cormorant)" }}
+          >
+            VOWEN
+          </span>
+          <button
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close menu"
+            className="p-1 hover:text-[#b89a72] transition-colors text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Drawer links */}
+        <nav className="flex-1 overflow-y-auto px-5 py-6">
+          <p className="text-[9px] tracking-[0.3em] uppercase text-gray-500 mb-3 font-inter">Shop</p>
+          <div className="flex flex-col">
             {shopCategories.map((cat) => (
               <a
-                key={cat}
-                href="#shop"
+                key={cat.label}
+                href={cat.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-2.5 text-[13px] tracking-[0.12em] uppercase text-gray-300 hover:text-white font-inter border-b border-white/5"
+                className="py-3 text-[12px] tracking-[0.15em] uppercase text-gray-300 hover:text-white font-inter border-b border-white/5 transition-colors"
               >
-                {cat}
+                {cat.label}
               </a>
             ))}
-            <div className="mt-4 flex flex-col gap-1">
-              {["Appointments", "Bespoke", "Rental", "Contact Us"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
-                  onClick={() => setMobileOpen(false)}
-                  className="py-2.5 text-[13px] tracking-[0.12em] uppercase text-white hover:text-[#b89a72] font-inter"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
           </div>
+
+          <div className="mt-6 flex flex-col">
+            <p className="text-[9px] tracking-[0.3em] uppercase text-gray-500 mb-3 font-inter">Menu</p>
+            {mainLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="py-3 text-[12px] tracking-[0.15em] uppercase text-white hover:text-[#b89a72] font-inter border-b border-white/5 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        {/* Drawer footer */}
+        <div className="px-5 py-5 border-t border-white/10 shrink-0">
+          <a
+            href="mailto:hello@vowenstudio.com"
+            className="text-[11px] text-gray-500 font-inter hover:text-gray-300 transition-colors"
+          >
+            hello@vowenstudio.com
+          </a>
         </div>
       </div>
     </>

@@ -33,12 +33,12 @@ export default function InstagramSection() {
           <p className="text-[12px] tracking-[0.25em] uppercase text-[#1e1e1e] font-inter">
             Follow us on Instagram{" "}
             <a
-              href="https://instagram.com/gamzestudio"
+              href="https://instagram.com/vowenstudio"
               className="text-[#b89a72] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              @gamzestudio
+              @vowenstudio
             </a>
           </p>
         </div>

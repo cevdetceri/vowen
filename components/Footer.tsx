@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Instagram, Facebook } from "lucide-react";
 
 const footerLinks = [
-  { label: "Care Guide", href: "#" },
-  { label: "Gift Card", href: "#" },
-  { label: "Stockists", href: "#" },
-  { label: "Delivery", href: "#" },
-  { label: "Returns Policy", href: "#" },
-  { label: "Clearpay", href: "#" },
+  { label: "Care Guide", href: "/careguide" },
+  { label: "Gift Card", href: "/gift-card" },
+  { label: "Stockists", href: "/stockists" },
+  { label: "Delivery", href: "/delivery" },
+  { label: "Returns Policy", href: "/returns-policy" },
+  { label: "Clearpay", href: "/clearpay" },
 ];
 
 export default function Footer() {
@@ -23,7 +23,7 @@ export default function Footer() {
               className="font-light tracking-[0.35em] uppercase text-[22px] hover:text-[#b89a72] transition-colors"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              GAMZE
+              VOWEN
             </Link>
             <p className="mt-4 text-[12px] text-gray-500 leading-relaxed font-inter font-light max-w-xs">
               Luxury bridal accessories, handcrafted in the finest materials
@@ -31,7 +31,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://instagram.com/gamzestudio"
+                href="https://instagram.com/vowenstudio"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -40,7 +40,7 @@ export default function Footer() {
                 <Instagram className="w-[18px] h-[18px]" />
               </a>
               <a
-                href="https://facebook.com/gamzestudio"
+                href="https://facebook.com/vowenstudio"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -76,10 +76,10 @@ export default function Footer() {
               Get in touch
             </p>
             <a
-              href="mailto:hello@gamzestudio.com"
+              href="mailto:hello@vowenstudio.com"
               className="text-[13px] text-gray-400 hover:text-white transition-colors font-inter"
             >
-              hello@gamzestudio.com
+              hello@vowenstudio.com
             </a>
             <p className="mt-4 text-[12px] text-gray-600 leading-relaxed font-inter">
               For bespoke enquiries, appointments and general questions — we
@@ -91,7 +91,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
           <p className="text-[11px] text-gray-600 font-inter tracking-[0.05em]">
-            © {new Date().getFullYear()} GAMZE Studio. All rights reserved.
+            © {new Date().getFullYear()} VOWEN Studio. All rights reserved.
           </p>
           <p className="text-[11px] text-gray-700 font-inter">
             Luxury bridal accessories for modern brides

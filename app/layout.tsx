@@ -18,11 +18,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "GAMZE Studio — Luxury Bridal Accessories",
+  title: "VOWEN Studio — Luxury Bridal Accessories",
   description:
     "Luxury accessories for modern brides. Soft colour palettes, sculptural forms and intricate details, handcrafted in the finest materials using artisan techniques.",
   openGraph: {
-    title: "GAMZE Studio — Luxury Bridal Accessories",
+    title: "VOWEN Studio — Luxury Bridal Accessories",
     description: "Luxury accessories for modern brides.",
     type: "website",
   },

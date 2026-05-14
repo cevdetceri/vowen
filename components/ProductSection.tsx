@@ -107,7 +107,7 @@ export default function ProductSection() {
               </p>
             </div>
             <a
-              href="#shop"
+              href="/earrings-1"
               className="mt-6 md:mt-0 self-start md:self-auto px-8 py-3 border border-[#1e1e1e] text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#1e1e1e] hover:text-white transition-all duration-300"
             >
               Shop Now
@@ -152,7 +152,7 @@ export default function ProductSection() {
                 hand-stitching — a timeless piece to carry down the aisle.
               </p>
               <a
-                href="#veils"
+                href="/veils"
                 className="inline-block px-8 py-3 bg-[#111] text-white text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#b89a72] transition-all duration-300"
               >
                 Shop Now

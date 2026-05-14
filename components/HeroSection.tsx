@@ -32,7 +32,7 @@ export default function HeroSection() {
           }`}
           style={{ transitionDelay: "0ms" }}
         >
-          GAMZE Studio
+          VOWEN Studio
         </p>
 
         <h1
@@ -76,13 +76,13 @@ export default function HeroSection() {
           style={{ transitionDelay: "440ms" }}
         >
           <a
-            href="#shop"
+            href="/shop"
             className="w-full sm:w-auto px-10 py-3.5 bg-white text-[#111] text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#b89a72] hover:text-white transition-all duration-300"
           >
             Shop Now
           </a>
           <a
-            href="#appointments"
+            href="/appointments"
             className="w-full sm:w-auto px-10 py-3.5 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase font-inter hover:border-[#b89a72] hover:text-[#b89a72] transition-all duration-300"
           >
             Book Appointment
