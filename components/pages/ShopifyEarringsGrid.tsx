@@ -5,6 +5,17 @@ import Image from "next/image";
 import { ShopifyProduct, formatPrice, getFirstImage } from "@/lib/shopify";
 import { useCart } from "@/context/CartContext";
 
+const FALLBACK_EARRINGS = [
+  { title: "Bridal Pearl Earrings", img: "https://i.etsystatic.com/65843420/r/il/114e3e/8032919737/il_fullxfull.8032919737_epvh.jpg", bg: "#e8e0d4" },
+  { title: "Sculptural Gold Earrings", img: "https://i.etsystatic.com/65843420/r/il/6da6f5/7982843862/il_fullxfull.7982843862_gsba.jpg", bg: "#ddd5c8" },
+  { title: "Crystal Drop Earrings", img: "https://i.etsystatic.com/65843420/r/il/a65866/8030815681/il_fullxfull.8030815681_6hcl.jpg", bg: "#e4e4e4" },
+  { title: "Pearl Cluster Earrings", img: "https://i.etsystatic.com/65843420/r/il/7d5f4c/8030684221/il_fullxfull.8030684221_n8pc.jpg", bg: "#dde0e4" },
+  { title: "Statement Bridal Earrings", img: "https://i.etsystatic.com/65843420/r/il/927005/8035338565/il_fullxfull.8035338565_4zsx.jpg", bg: "#e8dfd0" },
+  { title: "Delicate Drop Earrings", img: "https://i.etsystatic.com/65843420/r/il/0fd0c0/8032940881/il_fullxfull.8032940881_een4.jpg", bg: "#ece6de" },
+  { title: "Pearl Hoop Earrings", img: "https://i.etsystatic.com/65843420/r/il/114e3e/8032919737/il_fullxfull.8032919737_epvh.jpg", bg: "#e8e0d4" },
+  { title: "Vintage Style Earrings", img: "https://i.etsystatic.com/65843420/r/il/6da6f5/7982843862/il_fullxfull.7982843862_gsba.jpg", bg: "#ddd5c8" },
+];
+
 const sorts = ["Featured", "Price: Low to High", "Price: High to Low"];
 
 export default function ShopifyEarringsGrid({ products }: { products: ShopifyProduct[] }) {
@@ -51,10 +62,24 @@ export default function ShopifyEarringsGrid({ products }: { products: ShopifyPro
       {/* Grid */}
       <div className="px-6 md:px-12 lg:px-20 py-12">
         {sorted.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-[14px] text-[#7a7570] font-inter font-light">
-              Ürünler yükleniyor... Shopify token'ınızı ekleyin.
-            </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7">
+            {FALLBACK_EARRINGS.map((e, i) => (
+              <div key={i} className="group cursor-pointer">
+                <div className="relative aspect-[3/4] mb-4 overflow-hidden" style={{ background: e.bg }}>
+                  <Image
+                    src={e.img}
+                    alt={e.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                </div>
+                <h3 className="text-[15px] font-light text-[#1e1e1e]" style={{ fontFamily: "var(--font-cormorant)" }}>
+                  {e.title}
+                </h3>
+                <p className="text-[14px] text-[#1e1e1e] mt-1 font-inter">—</p>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-7">

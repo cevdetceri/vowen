@@ -51,12 +51,11 @@ function VideoCard({ videoSrc, posterSrc }: { videoSrc: string; posterSrc: strin
             muted
             loop
             playsInline
+            src={videoSrc}
             poster={posterSrc}
             className="w-full h-full object-cover"
             onError={() => setHasVideo(false)}
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
+          />
         ) : (
           <Image src={posterSrc} alt="VOWEN" fill className="object-cover" sizes="220px" />
         )}
