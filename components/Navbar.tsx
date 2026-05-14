@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Search, Menu, X, ChevronDown } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const shopCategories = [
   { label: "Earrings", href: "/earrings-1" },
@@ -27,6 +28,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const { totalQuantity, setCartOpen } = useCart();
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -36,70 +38,26 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111111] text-white">
-        <div className="flex items-center justify-between px-5 md:px-10 h-[64px]">
+        <div className="flex items-center px-5 md:px-10 h-[64px] gap-6">
 
-          {/* Left: hamburger (mobile) / nav links (desktop) */}
-          <div className="flex items-center gap-7 flex-1">
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="md:hidden p-1 hover:text-[#b89a72] transition-colors"
-              aria-label="Open menu"
-            >
-              <Menu className="w-5 h-5" />
-            </button>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="md:hidden p-1 hover:text-[#b89a72] transition-colors shrink-0"
+            aria-label="Open menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
 
-            {/* Desktop nav links */}
-            <div className="hidden md:flex items-center gap-7">
-              {/* Shop dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setShopOpen(true)}
-                onMouseLeave={() => setShopOpen(false)}
-              >
-                <button className="flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors h-[64px]">
-                  Shop <ChevronDown className="w-3 h-3" />
-                </button>
-                <div
-                  className={`absolute top-full left-0 transition-all duration-200 ${
-                    shopOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
-                  }`}
-                >
-                  <div className="bg-[#1a1a1a] border border-white/10 min-w-[220px] py-2 shadow-xl">
-                    {shopCategories.map((cat) => (
-                      <a
-                        key={cat.label}
-                        href={cat.href}
-                        className="block px-5 py-2.5 text-[11px] tracking-[0.15em] uppercase text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-inter"
-                      >
-                        {cat.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {mainLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Centre: logo */}
-          <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+          {/* Logo — left */}
+          <Link href="/" className="shrink-0 flex items-center">
             {!logoError ? (
               <Image
-                src="/vowen-logo.png"
+                src="/voven-transparent.png"
                 alt="VOWEN"
-                width={110}
-                height={36}
-                className="invert brightness-200 object-contain max-h-[36px]"
+                width={160}
+                height={52}
+                className="invert brightness-200 object-contain max-h-[52px]"
                 onError={() => setLogoError(true)}
                 priority
               />
@@ -113,14 +71,64 @@ export default function Navbar() {
             )}
           </Link>
 
+          {/* Desktop nav links — right of logo */}
+          <div className="hidden md:flex items-center gap-7 flex-1">
+            {/* Shop dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setShopOpen(true)}
+              onMouseLeave={() => setShopOpen(false)}
+            >
+              <button className="flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors h-[64px]">
+                Shop <ChevronDown className="w-3 h-3" />
+              </button>
+              <div
+                className={`absolute top-full left-0 transition-all duration-200 ${
+                  shopOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+                }`}
+              >
+                <div className="bg-[#1a1a1a] border border-white/10 min-w-[220px] py-2 shadow-xl">
+                  {shopCategories.map((cat) => (
+                    <a
+                      key={cat.label}
+                      href={cat.href}
+                      className="block px-5 py-2.5 text-[11px] tracking-[0.15em] uppercase text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-inter"
+                    >
+                      {cat.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {mainLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-[11px] tracking-[0.2em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
           {/* Right: search + bag */}
-          <div className="flex items-center gap-4 flex-1 justify-end">
+          <div className="flex items-center gap-4 ml-auto">
             <a href="/search" aria-label="Search" className="hover:text-[#b89a72] transition-colors">
               <Search className="w-[17px] h-[17px]" />
             </a>
-            <a href="/cart" aria-label="Shopping bag" className="hover:text-[#b89a72] transition-colors">
+            <button
+              onClick={() => setCartOpen(true)}
+              aria-label="Shopping bag"
+              className="relative hover:text-[#b89a72] transition-colors"
+            >
               <ShoppingBag className="w-[17px] h-[17px]" />
-            </a>
+              {totalQuantity > 0 && (
+                <span className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#b89a72] text-white text-[9px] flex items-center justify-center font-inter">
+                  {totalQuantity}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </nav>

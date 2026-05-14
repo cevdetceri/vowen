@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { OrangeGlowBackground } from "@/components/ui/background-components";
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
@@ -10,20 +11,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#111111]">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 z-10" />
-
-      {/* Background pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
-          backgroundSize: "20px 20px",
-        }}
-      />
-
+    <OrangeGlowBackground className="min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
       {/* Content */}
       <div className="relative z-20 px-6 max-w-3xl mx-auto">
         <p
@@ -36,7 +24,7 @@ export default function HeroSection() {
         </p>
 
         <h1
-          className={`font-cormorant text-white leading-[1.05] mb-8 transition-all duration-1000 ${
+          className={`leading-[1.05] mb-8 transition-all duration-1000 text-[#1e1e1e] ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
           style={{
@@ -53,7 +41,7 @@ export default function HeroSection() {
         </h1>
 
         <p
-          className={`text-[13px] md:text-[14px] text-gray-300 leading-relaxed mb-4 font-inter font-light transition-all duration-1000 ${
+          className={`text-[13px] md:text-[14px] text-[#5a5550] leading-relaxed mb-4 font-inter font-light transition-all duration-1000 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{ transitionDelay: "240ms" }}
@@ -61,7 +49,7 @@ export default function HeroSection() {
           soft colour palettes, sculptural forms and intricate details
         </p>
         <p
-          className={`text-[13px] md:text-[14px] text-gray-400 leading-relaxed mb-12 font-inter font-light transition-all duration-1000 ${
+          className={`text-[13px] md:text-[14px] text-[#7a7570] leading-relaxed mb-12 font-inter font-light transition-all duration-1000 ${
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
           style={{ transitionDelay: "320ms" }}
@@ -77,13 +65,13 @@ export default function HeroSection() {
         >
           <a
             href="/shop"
-            className="w-full sm:w-auto px-10 py-3.5 bg-white text-[#111] text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#b89a72] hover:text-white transition-all duration-300"
+            className="w-full sm:w-auto px-10 py-3.5 bg-[#1e1e1e] text-white text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#b89a72] transition-all duration-300"
           >
             Shop Now
           </a>
           <a
             href="/appointments"
-            className="w-full sm:w-auto px-10 py-3.5 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase font-inter hover:border-[#b89a72] hover:text-[#b89a72] transition-all duration-300"
+            className="w-full sm:w-auto px-10 py-3.5 border border-[#1e1e1e]/40 text-[#1e1e1e] text-[11px] tracking-[0.2em] uppercase font-inter hover:border-[#b89a72] hover:text-[#b89a72] transition-all duration-300"
           >
             Book Appointment
           </a>
@@ -97,9 +85,9 @@ export default function HeroSection() {
         }`}
         style={{ transitionDelay: "700ms" }}
       >
-        <span className="text-[9px] tracking-[0.3em] uppercase text-gray-500 font-inter">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-gray-500 to-transparent" />
+        <span className="text-[9px] tracking-[0.3em] uppercase text-[#7a7570] font-inter">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-[#7a7570] to-transparent" />
       </div>
-    </section>
+    </OrangeGlowBackground>
   );
 }
