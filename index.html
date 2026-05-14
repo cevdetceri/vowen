@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOWEN — Luxury Bridal Accessories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --nav-bg:      #111111;
+      --bg-white:    #ffffff;
+      --bg-soft:     #faf8f5;
+      --bg-blush:    #f1ebe3;
+      --bg-blush-2:  #ece4db;
+      --text-dark:   #1c1c1c;
+      --text-mid:    #5a5248;
+      --text-light:  #9e8e7e;
+      --gold:        #b8a48e;
+      --gold-dark:   #8c7a6a;
+      --border:      rgba(28,28,28,0.10);
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Jost', -apple-system, sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: var(--bg-white);
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      height: 72px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0;
+    }
+    .nav-right { justify-content: flex-end; gap: 24px; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── VOWEN logo mark ── */
+    .vowen-logo {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.2em;
+    }
+
+    .vowen-flower {
+      position: absolute;
+      width: 13px;
+      height: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* footer version of the logo */
+    .vowen-logo-footer {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .vowen-logo-footer .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.28em;
+    }
+
+    .vowen-logo-footer .vowen-flower {
+      position: absolute;
+      width: 12px;
+      height: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-item > a {
+      display: block;
+      padding: 0 18px;
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      height: 72px;
+      line-height: 72px;
+      transition: color 200ms ease;
+      white-space: nowrap;
+    }
+    .nav-item > a:hover { color: #ffffff; }
+
+    .nav-dropdown {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      background: var(--nav-bg);
+      min-width: 210px;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: all 220ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .nav-item:hover .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-dropdown li a {
+      display: block;
+      padding: 11px 24px;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      transition: color 150ms ease, background 150ms ease;
+    }
+    .nav-dropdown li a:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .nav-action {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: color 150ms ease;
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+    }
+    .nav-action:hover { color: #ffffff; }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .mobile-menu-btn span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: rgba(255,255,255,0.8);
+      transition: all 300ms ease;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      margin-top: 72px;
+      height: calc(100vh - 72px);
+      min-height: 640px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=1600&q=80') center/cover no-repeat;
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+    .hero-img.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(17,17,17,0.52) 0%,
+        rgba(17,17,17,0.38) 50%,
+        rgba(17,17,17,0.60) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      padding: 0 24px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 300ms forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 500ms forwards;
+    }
+
+    .hero-sub {
+      font-family: var(--font-serif);
+      font-size: clamp(0.95rem, 2vw, 1.2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.75;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 700ms forwards;
+    }
+
+    .hero-sub-2 {
+      font-family: var(--font-serif);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 850ms forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 1000ms forwards;
+    }
+
+    .btn-outline-light {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.55);
+      padding: 15px 40px;
+      transition: all 280ms ease;
+    }
+    .btn-outline-light:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    .btn-solid-light {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      background: #ffffff;
+      padding: 15px 40px;
+      transition: all 280ms ease;
+    }
+    .btn-solid-light:hover { background: rgba(255,255,255,0.88); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 1s ease-out 1300ms forwards;
+    }
+    .hero-scroll span {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.3);
+      margin: 0 auto;
+      animation: scrollPulse 2s ease-in-out 1.5s infinite;
+    }
+
+    /* ── Marquee band ── */
+    .marquee-band {
+      background: var(--bg-blush);
+      padding: 16px 0;
+      overflow: hidden;
+      border-top: 1px solid var(--bg-blush-2);
+      border-bottom: 1px solid var(--bg-blush-2);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: marquee 32s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 0.06em;
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+
+    .marquee-dot {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    /* ── Buttons (dark on light bg) ── */
+    .btn-outline {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      border: 1px solid var(--text-dark);
+      padding: 14px 38px;
+      transition: all 260ms ease;
+    }
+    .btn-outline:hover {
+      background: var(--text-dark);
+      color: #ffffff;
+    }
+
+    /* ── Split sections ── */
+    .split-section {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 620px;
+    }
+    .split-section.flip { grid-template-columns: 45% 55%; }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-blush);
+    }
+    .split-image img {
+      transition: transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .split-section:hover .split-image img { transform: scale(1.04); }
+
+    .split-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 88px 80px;
+    }
+    .split-text.bg-soft { background: var(--bg-soft); }
+    .split-text.bg-white { background: var(--bg-white); }
+    .split-text.bg-blush { background: var(--bg-blush); }
+
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 18px;
+    }
+
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+    }
+
+    .section-body {
+      font-family: var(--font-serif);
+      font-size: 1.02rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin-bottom: 40px;
+      max-width: 360px;
+    }
+
+    /* ── Product grid ── */
+    .product-section {
+      padding: 100px 60px;
+      background: var(--bg-white);
+    }
+
+    .product-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card { cursor: pointer; }
+
+    .product-card-img {
+      aspect-ratio: 2/3;
+      overflow: hidden;
+      background: var(--bg-blush);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .product-card-img img {
+      transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .product-card-img img { transform: scale(1.06); }
+
+    .product-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 300ms ease;
+    }
+    .product-card:hover .product-card-img::after { background: rgba(0,0,0,0.04); }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .product-variant {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--text-mid);
+    }
+
+    /* ── Tagline band ── */
+    .tagline-band {
+      background: var(--nav-bg);
+      padding: 100px 40px;
+      text-align: center;
+    }
+
+    .tagline-band blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 3.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.35;
+      max-width: 780px;
+      margin: 0 auto 12px;
+    }
+
+    .tagline-attribution {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 40px;
+    }
+
+    /* ── Instagram section ── */
+    .instagram-section {
+      padding: 100px 0 0;
+      background: var(--bg-white);
+      text-align: center;
+    }
+
+    .instagram-header {
+      padding: 0 60px 48px;
+    }
+
+    .instagram-handle {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 12px;
+    }
+
+    .instagram-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 3px;
+    }
+
+    .instagram-tile {
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .instagram-tile img {
+      transition: transform 600ms ease;
+    }
+    .instagram-tile:hover img { transform: scale(1.07); }
+
+    .instagram-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 250ms ease;
+    }
+    .instagram-tile:hover::after { background: rgba(0,0,0,0.14); }
+
+    /* ── Mailing list ── */
+    .mailing-section {
+      background: var(--bg-soft);
+      padding: 100px 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .mailing-section .section-label { margin-bottom: 16px; }
+
+    .mailing-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .mailing-section p {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .mailing-form {
+      display: flex;
+      gap: 0;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .mailing-input {
+      flex: 1;
+      border: 1px solid var(--border);
+      border-right: none;
+      background: #ffffff;
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 15px 22px;
+      outline: none;
+      transition: border-color 200ms ease;
+    }
+    .mailing-input::placeholder { color: var(--text-light); }
+    .mailing-input:focus { border-color: var(--gold); }
+
+    .mailing-btn {
+      background: var(--text-dark);
+      color: #ffffff;
+      border: 1px solid var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 15px 30px;
+      cursor: pointer;
+      transition: all 220ms ease;
+    }
+    .mailing-btn:hover { background: #333; border-color: #333; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--nav-bg);
+      padding: 72px 60px 40px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .footer-brand-block {
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.38);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 11px; }
+    .footer-col ul li a {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.45);
+      transition: color 150ms ease;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.82); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.28);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-social a {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      transition: color 150ms ease;
+    }
+    .footer-social a:hover { color: rgba(255,255,255,0.78); }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Keyframes ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50%       { opacity: 0.7; transform: scaleY(1.2); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1000px) {
+      .split-section { grid-template-columns: 1fr; }
+      .split-section.flip { grid-template-columns: 1fr; }
+      .split-section.flip .split-image { order: -1; }
+      .split-image { min-height: 480px; }
+      .split-text { padding: 64px 48px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .instagram-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-left { display: none; }
+      .nav-right { display: none; }
+      .nav-logo { font-size: 1.3rem; }
+      .mobile-menu-btn { display: flex; }
+      .product-section { padding: 72px 24px; }
+      .instagram-section { padding: 72px 0 0; }
+      .instagram-header { padding: 0 24px 36px; }
+      .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 56px 24px 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .mailing-form { flex-direction: column; }
+      .mailing-input { border-right: 1px solid var(--border); border-bottom: none; }
+      .footer-top { margin-bottom: 40px; padding-bottom: 36px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <!-- Left nav links -->
+    <ul class="nav-left">
+      <li class="nav-item">
+        <a href="shop.html">Shop</a>
+        <ul class="nav-dropdown">
+          <li><a href="shop.html">Earrings</a></li>
+          <li><a href="shop.html">Veils</a></li>
+          <li><a href="shop.html">Neck Scarves &amp; Bows</a></li>
+          <li><a href="shop.html">Headbands</a></li>
+          <li><a href="shop.html">Hairvines</a></li>
+          <li><a href="shop.html">Haircombs</a></li>
+          <li><a href="shop.html">Hairpins</a></li>
+          <li><a href="shop.html">The Bridal Bag</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="contact.html">Appointments</a>
+        <ul class="nav-dropdown">
+          <li><a href="contact.html">Book Appointment</a></li>
+          <li><a href="about.html">The Studio</a></li>
+          <li><a href="about.html">Meet the Team</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="pricing.html">Bespoke</a></li>
+    </ul>
+
+    <!-- Centre logo -->
+    <div class="nav-logo">
+      <a href="index.html"><span class="vowen-logo">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span></a>
+    </div>
+
+    <!-- Right actions -->
+    <div class="nav-right">
+      <li class="nav-item"><a href="about.html">Our Story</a></li>
+      <li class="nav-item"><a href="blog.html">Journal</a></li>
+      <button class="nav-action">Search</button>
+      <button class="nav-action">Cart (0)</button>
+      <!-- Mobile toggle -->
+      <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-img" id="heroImg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Vowen Studio</p>
+      <h1>luxury accessories<br>for modern brides</h1>
+      <p class="hero-sub">soft colour palettes, sculptural forms and intricate details</p>
+      <p class="hero-sub-2">handcrafted in the finest materials, using artisan techniques</p>
+      <div class="hero-cta">
+        <a href="#" class="btn-solid-light">Explore the Collection</a>
+        <a href="#" class="btn-outline-light">Book an Appointment</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Marquee band -->
+  <div class="marquee-band">
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- items duplicated by JS for seamless loop -->
+      <span class="marquee-item">handcrafted in our studio <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">freshwater pearls <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">18ct gold <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">bespoke orders welcome <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">made to order <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">artisan techniques <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">british studio <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">free uk delivery <span class="marquee-dot">·</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-item">handcrafted in our studio <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">freshwater pearls <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">18ct gold <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">bespoke orders welcome <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">made to order <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">artisan techniques <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">british studio <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">free uk delivery <span class="marquee-dot">·</span></span>
+    </div>
+  </div>
+
+  <!-- Statement Earrings -->
+  <section class="split-section reveal">
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80"
+           alt="Statement earrings" loading="lazy">
+    </div>
+    <div class="split-text bg-white">
+      <p class="section-label">Collection</p>
+      <h2 class="section-heading">shop statement<br>earrings</h2>
+      <p class="section-body">from cascading freshwater pearls to sculptural studs — each piece designed to be worn and treasured long after the celebration ends</p>
+      <a href="#" class="btn-outline">Shop Earrings</a>
+    </div>
+  </section>
+
+  <!-- Precious Metals -->
+  <section class="split-section flip reveal">
+    <div class="split-text bg-soft">
+      <p class="section-label">Featured</p>
+      <h2 class="section-heading">the precious metals<br>collection</h2>
+      <p class="section-body">timeless pieces in 18ct gold, gold plated and sterling silver — crafted to complement every bridal aesthetic, from minimal to maximalist</p>
+      <a href="#" class="btn-outline">Explore Now</a>
+    </div>
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1573408301185-9519eb7ece29?w=900&q=80"
+           alt="Gold jewellery" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Product Grid — Earrings -->
+  <section class="product-section reveal">
+    <div class="product-section-header">
+      <p class="section-label">New Arrivals</p>
+      <h2 class="section-heading">bestselling earrings</h2>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1596944924591-6f11a42e4e9d?w=600&q=80" alt="Emma Studs" loading="lazy">
+        </div>
+        <p class="product-name">Emma Studs</p>
+        <p class="product-variant">18ct Gold</p>
+        <p class="product-price">£85</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&q=80" alt="Ada Pearl" loading="lazy">
+        </div>
+        <p class="product-name">Ada Pearl</p>
+        <p class="product-variant">Gold Plated</p>
+        <p class="product-price">£68</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1601121141418-7c39f2583d75?w=600&q=80" alt="Iris Drop" loading="lazy">
+        </div>
+        <p class="product-name">Iris Drop</p>
+        <p class="product-variant">Sterling Silver</p>
+        <p class="product-price">£72</p>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img">
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80" alt="Clara Hoop" loading="lazy">
+        </div>
+        <p class="product-name">Clara Hoop</p>
+        <p class="product-variant">18ct Gold</p>
+        <p class="product-price">£95</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Veils -->
+  <section class="split-section reveal">
+    <div class="split-image">
+      <img src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=900&q=80"
+           alt="Bridal veil" loading="lazy">
+    </div>
+    <div class="split-text bg-blush">
+      <p class="section-label">Veils</p>
+      <h2 class="section-heading">shop veils</h2>
+      <p class="section-body">from minimal and understated to intricately embellished — every veil is handmade to order in our studio, using the finest silk and tulle</p>
+      <a href="#" class="btn-outline">Explore Veils</a>
+    </div>
+  </section>
+
+  <!-- Tagline band -->
+  <div class="tagline-band reveal">
+    <blockquote>"each piece begins as an idea — refined through touch, material and light"</blockquote>
+    <p class="tagline-attribution">Gamze Studio</p>
+    <a href="#" class="btn-outline-light">Book a Studio Appointment</a>
+  </div>
+
+  <!-- Instagram -->
+  <section class="instagram-section reveal">
+    <div class="instagram-header">
+      <p class="instagram-handle">@vowen</p>
+      <h2 class="instagram-title">Follow us on Instagram</h2>
+    </div>
+    <div class="instagram-grid">
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=400&q=75" alt="" loading="lazy">
+      </div>
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400&q=75" alt="" loading="lazy">
+      </div>
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&q=75" alt="" loading="lazy">
+      </div>
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1596944924591-6f11a42e4e9d?w=400&q=75" alt="" loading="lazy">
+      </div>
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=75" alt="" loading="lazy">
+      </div>
+      <div class="instagram-tile">
+        <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&q=75" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Mailing list -->
+  <section class="mailing-section reveal">
+    <p class="section-label">Stay in Touch</p>
+    <h2>join our mailing list</h2>
+    <p>receive 10% off your first order, plus new arrivals<br>and exclusive studio events</p>
+    <form class="mailing-form" onsubmit="return false">
+      <input class="mailing-input" type="email" placeholder="your email address">
+      <button class="mailing-btn" type="submit">Sign Up</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand-block">
+        <div class="vowen-logo-footer">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</div>
+        <p class="footer-tagline">luxury bridal accessories, handcrafted with intention</p>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Earrings</a></li>
+          <li><a href="#">Veils</a></li>
+          <li><a href="#">Headbands</a></li>
+          <li><a href="#">Hairvines</a></li>
+          <li><a href="#">The Bridal Bag</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Bespoke Orders</a></li>
+          <li><a href="#">Book Appointment</a></li>
+          <li><a href="#">The Studio</a></li>
+          <li><a href="#">Rental</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="#">Care Guide</a></li>
+          <li><a href="#">Gift Card</a></li>
+          <li><a href="#">Stockists</a></li>
+          <li><a href="#">Delivery</a></li>
+          <li><a href="#">Returns Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@vowen.com">hello@vowen.com</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 VOWEN. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Pinterest</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hero image parallax on load
+    const heroImg = document.getElementById('heroImg');
+    heroImg.addEventListener('load', () => heroImg.classList.add('loaded'), { once: true });
+    setTimeout(() => heroImg.classList.add('loaded'), 100);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Staggered product card reveal
+    document.querySelectorAll('.product-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 80}ms`;
+      card.classList.add('reveal');
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>

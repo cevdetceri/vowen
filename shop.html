@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All — VOWEN Luxury Bridal Accessories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nav-bg:#111111; --bg-white:#ffffff; --bg-soft:#faf8f5; --bg-blush:#f1ebe3;
+      --bg-blush-2:#ece4db; --text-dark:#1c1c1c; --text-mid:#5a5248; --text-light:#9e8e7e;
+      --gold:#b8a48e; --gold-dark:#8c7a6a; --border:rgba(28,28,28,0.10);
+      --font-serif:'Cormorant Garamond',Georgia,serif; --font-sans:'Jost',-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-sans);color:var(--text-dark);background:var(--bg-white);overflow-x:hidden;}
+    img{display:block;width:100%;height:100%;object-fit:cover;}
+    a{text-decoration:none;color:inherit;}
+    button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--nav-bg);height:72px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 40px;}
+    .nav-left,.nav-right{display:flex;align-items:center;list-style:none;}
+    .nav-right{justify-content:flex-end;gap:24px;}
+    .nav-logo a{display:flex;align-items:center;justify-content:center;}
+    .vowen-logo{font-family:var(--font-serif);font-size:1.7rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:#fff;display:inline-flex;align-items:baseline;line-height:1;white-space:nowrap;}
+    .vowen-e{position:relative;display:inline-block;letter-spacing:0;margin-right:0.2em;}
+    .vowen-flower{position:absolute;width:13px;height:18px;left:50%;transform:translateX(-50%);bottom:calc(100% + 3px);pointer-events:none;overflow:visible;}
+    .nav-item{position:relative;}
+    .nav-item>a{display:block;padding:0 18px;font-size:0.62rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.78);height:72px;line-height:72px;transition:color 200ms ease;white-space:nowrap;}
+    .nav-item>a:hover,.nav-item>a.active{color:#fff;}
+    .nav-dropdown{position:absolute;top:72px;left:0;background:var(--nav-bg);min-width:210px;list-style:none;opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 220ms ease;border-top:1px solid rgba(255,255,255,0.07);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+    .nav-item:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+    .nav-dropdown li a{display:block;padding:11px 24px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 150ms ease,background 150ms ease;}
+    .nav-dropdown li a:hover{color:#fff;background:rgba(255,255,255,0.04);}
+    .nav-action{font-size:0.6rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);transition:color 150ms ease;}
+    .nav-action:hover{color:#fff;}
+
+    /* PAGE HERO */
+    .page-hero{margin-top:72px;background:var(--bg-soft);padding:80px 60px 64px;border-bottom:1px solid var(--border);}
+    .breadcrumb{font-family:var(--font-sans);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:20px;}
+    .breadcrumb a{color:var(--text-light);transition:color 150ms ease;}
+    .breadcrumb a:hover{color:var(--text-dark);}
+    .breadcrumb span{margin:0 8px;}
+    .page-hero h1{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,4rem);font-weight:300;font-style:italic;color:var(--text-dark);margin-bottom:12px;}
+    .page-hero p{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-mid);}
+
+    /* FILTER BAR */
+    .filter-bar{position:sticky;top:72px;z-index:100;background:#fff;border-bottom:1px solid var(--border);padding:0 60px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .filter-pills{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+    .filter-pills::-webkit-scrollbar{display:none;}
+    .pill{font-family:var(--font-sans);font-size:0.58rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);padding:20px 18px;border-bottom:2px solid transparent;cursor:pointer;transition:all 200ms ease;white-space:nowrap;background:none;border-left:none;border-right:none;border-top:none;}
+    .pill:hover{color:var(--text-dark);}
+    .pill.active{color:var(--text-dark);border-bottom-color:var(--text-dark);}
+    .sort-select{font-family:var(--font-sans);font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-mid);border:1px solid var(--border);padding:8px 16px;background:#fff;outline:none;cursor:pointer;flex-shrink:0;}
+
+    /* PRODUCT GRID */
+    .product-section{padding:56px 60px 80px;}
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 16px;}
+    .product-card{cursor:pointer;}
+    .product-card-img{aspect-ratio:2/3;overflow:hidden;background:var(--bg-blush);margin-bottom:14px;position:relative;}
+    .product-card-img img{transition:transform 600ms cubic-bezier(0.25,0.46,0.45,0.94);}
+    .product-card:hover .product-card-img img{transform:scale(1.06);}
+    .product-badge{position:absolute;top:12px;left:12px;font-family:var(--font-sans);font-size:0.5rem;letter-spacing:0.18em;text-transform:uppercase;background:var(--nav-bg);color:#fff;padding:4px 10px;}
+    .product-name{font-family:var(--font-serif);font-size:1rem;font-weight:400;font-style:italic;color:var(--text-dark);margin-bottom:3px;}
+    .product-variant{font-family:var(--font-sans);font-size:0.62rem;font-weight:300;letter-spacing:0.06em;color:var(--text-light);margin-bottom:3px;}
+    .product-price{font-family:var(--font-sans);font-size:0.72rem;font-weight:300;color:var(--text-mid);}
+    .product-card.hidden{display:none;}
+
+    /* LOAD MORE */
+    .load-more-wrap{text-align:center;padding:40px 0 80px;}
+
+    /* CTA BAND */
+    .cta-band{background:var(--bg-blush);padding:80px 40px;text-align:center;}
+    .cta-band h2{font-family:var(--font-serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;color:var(--text-dark);margin-bottom:12px;}
+    .cta-band p{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-mid);margin-bottom:32px;}
+
+    /* BUTTONS */
+    .btn-outline{display:inline-block;font-family:var(--font-sans);font-size:0.6rem;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--text-dark);border:1px solid var(--text-dark);padding:14px 38px;transition:all 260ms ease;}
+    .btn-outline:hover{background:var(--text-dark);color:#fff;}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 700ms ease,transform 700ms ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* FOOTER */
+    footer{background:var(--nav-bg);padding:72px 60px 40px;color:rgba(255,255,255,0.55);}
+    .footer-top{display:flex;justify-content:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .vowen-logo-footer{font-family:var(--font-serif);font-size:1.5rem;font-weight:300;letter-spacing:0.28em;text-transform:uppercase;color:#fff;display:inline-flex;align-items:baseline;line-height:1;}
+    .vowen-logo-footer .vowen-e{position:relative;display:inline-block;letter-spacing:0;margin-right:0.28em;}
+    .vowen-logo-footer .vowen-flower{position:absolute;width:12px;height:16px;left:50%;transform:translateX(-50%);bottom:calc(100% + 3px);pointer-events:none;overflow:visible;}
+    .footer-tagline{font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:6px;}
+    .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:48px;}
+    .footer-col h4{font-family:var(--font-sans);font-size:0.58rem;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;}
+    .footer-col ul{list-style:none;}
+    .footer-col ul li{margin-bottom:10px;}
+    .footer-col ul li a{font-family:var(--font-sans);font-size:0.72rem;font-weight:300;color:rgba(255,255,255,0.45);transition:color 150ms ease;}
+    .footer-col ul li a:hover{color:rgba(255,255,255,0.82);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+    .footer-copy{font-size:0.62rem;letter-spacing:0.08em;color:rgba(255,255,255,0.28);}
+    .footer-social{display:flex;gap:20px;}
+    .footer-social a{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.38);transition:color 150ms ease;}
+    .footer-social a:hover{color:rgba(255,255,255,0.78);}
+
+    @media(max-width:900px){.product-grid{grid-template-columns:repeat(2,1fr);} .filter-bar{padding:0 24px;} .product-section{padding:40px 24px;}}
+    @media(max-width:600px){nav{padding:0 20px;} .nav-left{display:none;} .page-hero{padding:60px 24px 48px;} .footer-grid{grid-template-columns:1fr 1fr;} footer{padding:48px 24px 32px;}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li class="nav-item"><a href="shop.html" class="active">Shop</a>
+      <ul class="nav-dropdown">
+        <li><a href="shop.html">Earrings</a></li>
+        <li><a href="shop.html">Veils</a></li>
+        <li><a href="shop.html">Neck Scarves &amp; Bows</a></li>
+        <li><a href="shop.html">Headbands</a></li>
+        <li><a href="shop.html">Hairvines</a></li>
+        <li><a href="shop.html">Haircombs</a></li>
+        <li><a href="shop.html">Hairpins</a></li>
+        <li><a href="shop.html">The Bridal Bag</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a href="contact.html">Appointments</a>
+      <ul class="nav-dropdown">
+        <li><a href="contact.html">Book Appointment</a></li>
+        <li><a href="about.html">The Studio</a></li>
+        <li><a href="about.html">Meet the Team</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a href="pricing.html">Bespoke</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html"><span class="vowen-logo">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span></a>
+  </div>
+  <div class="nav-right">
+    <li class="nav-item"><a href="about.html">Our Story</a></li>
+    <li class="nav-item"><a href="blog.html">Journal</a></li>
+    <button class="nav-action">Search</button>
+    <button class="nav-action">Cart (0)</button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="index.html">Home</a><span>›</span>Shop</p>
+  <h1>Shop All</h1>
+  <p>handcrafted bridal accessories, made to order in our british studio</p>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-pills">
+    <button class="pill active" data-filter="all">All</button>
+    <button class="pill" data-filter="earrings">Earrings</button>
+    <button class="pill" data-filter="veils">Veils</button>
+    <button class="pill" data-filter="headbands">Headbands</button>
+    <button class="pill" data-filter="hairvines">Hairvines</button>
+    <button class="pill" data-filter="haircombs">Haircombs</button>
+    <button class="pill" data-filter="hairpins">Hairpins</button>
+    <button class="pill" data-filter="bags">The Bridal Bag</button>
+  </div>
+  <select class="sort-select"><option>Sort by: Featured</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select>
+</div>
+
+<section class="product-section">
+  <div class="product-grid" id="productGrid">
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><span class="product-badge">New</span><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80" alt="Emma Studs" loading="lazy"></div>
+      <p class="product-name">Emma Studs</p><p class="product-variant">18ct Gold</p><p class="product-price">£85</p>
+    </div>
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1596944924591-6f11a42e4e9d?w=600&q=80" alt="Ada Pearl" loading="lazy"></div>
+      <p class="product-name">Ada Pearl</p><p class="product-variant">Gold Plated</p><p class="product-price">£68</p>
+    </div>
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1601121141418-7c39f2583d75?w=600&q=80" alt="Iris Drop" loading="lazy"></div>
+      <p class="product-name">Iris Drop</p><p class="product-variant">Sterling Silver</p><p class="product-price">£72</p>
+    </div>
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><span class="product-badge">Bestseller</span><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80" alt="Clara Hoop" loading="lazy"></div>
+      <p class="product-name">Clara Hoop</p><p class="product-variant">18ct Gold</p><p class="product-price">£95</p>
+    </div>
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&q=80" alt="Elara Cascade" loading="lazy"></div>
+      <p class="product-name">Elara Cascade</p><p class="product-variant">Freshwater Pearl</p><p class="product-price">£125</p>
+    </div>
+
+    <div class="product-card" data-category="earrings">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80" alt="Nora Cluster" loading="lazy"></div>
+      <p class="product-name">Nora Cluster</p><p class="product-variant">Gold &amp; Pearl</p><p class="product-price">£110</p>
+    </div>
+
+    <div class="product-card" data-category="veils">
+      <div class="product-card-img"><span class="product-badge">Made to Order</span><img src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=600&q=80" alt="Cathedral Veil" loading="lazy"></div>
+      <p class="product-name">Cathedral Veil</p><p class="product-variant">Ivory Silk Tulle</p><p class="product-price">£245</p>
+    </div>
+
+    <div class="product-card" data-category="veils">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=600&q=80" alt="Fingertip Silk Veil" loading="lazy"></div>
+      <p class="product-name">Fingertip Silk Veil</p><p class="product-variant">Blush or Ivory</p><p class="product-price">£195</p>
+    </div>
+
+    <div class="product-card" data-category="veils">
+      <div class="product-card-img"><img src="https://picsum.photos/seed/veil3/400/600" alt="Embroidered Tulle" loading="lazy"></div>
+      <p class="product-name">Embroidered Tulle</p><p class="product-variant">Ivory with Floral Edge</p><p class="product-price">£285</p>
+    </div>
+
+    <div class="product-card" data-category="headbands">
+      <div class="product-card-img"><img src="https://images.unsplash.com/photo-1573408301185-9519eb7ece29?w=600&q=80" alt="Pearl Headband" loading="lazy"></div>
+      <p class="product-name">Pearl Headband</p><p class="product-variant">Freshwater Pearl</p><p class="product-price">£78</p>
+    </div>
+
+    <div class="product-card" data-category="headbands">
+      <div class="product-card-img"><img src="https://picsum.photos/seed/head2/400/600" alt="Crystal Band" loading="lazy"></div>
+      <p class="product-name">Crystal Band</p><p class="product-variant">Clear Crystal</p><p class="product-price">£115</p>
+    </div>
+
+    <div class="product-card" data-category="hairvines">
+      <div class="product-card-img"><span class="product-badge">New</span><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80" alt="Ivy Hairvine" loading="lazy"></div>
+      <p class="product-name">Ivy Hairvine</p><p class="product-variant">Gold Wire &amp; Pearl</p><p class="product-price">£145</p>
+    </div>
+
+    <div class="product-card" data-category="hairvines">
+      <div class="product-card-img"><img src="https://picsum.photos/seed/vine2/400/600" alt="Pearl Drape Vine" loading="lazy"></div>
+      <p class="product-name">Pearl Drape Vine</p><p class="product-variant">Freshwater Pearl</p><p class="product-price">£168</p>
+    </div>
+
+    <div class="product-card" data-category="haircombs">
+      <div class="product-card-img"><img src="https://picsum.photos/seed/comb1/400/600" alt="Floral Comb" loading="lazy"></div>
+      <p class="product-name">Floral Comb</p><p class="product-variant">Pressed Florals</p><p class="product-price">£62</p>
+    </div>
+
+    <div class="product-card" data-category="hairpins">
+      <div class="product-card-img"><img src="https://picsum.photos/seed/pin1/400/600" alt="Pearl Pins Set" loading="lazy"></div>
+      <p class="product-name">Pearl Pin Set</p><p class="product-variant">Set of 6</p><p class="product-price">£48</p>
+    </div>
+
+    <div class="product-card" data-category="bags">
+      <div class="product-card-img"><span class="product-badge">Bespoke</span><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="The Bridal Bag" loading="lazy"></div>
+      <p class="product-name">The Bridal Bag</p><p class="product-variant">Embroidered Ivory Silk</p><p class="product-price">from £185</p>
+    </div>
+
+  </div>
+  <div class="load-more-wrap">
+    <button class="btn-outline" style="margin-top:48px">Load More</button>
+  </div>
+</section>
+
+<div class="cta-band reveal">
+  <h2>can't find what you're looking for?</h2>
+  <p>explore our bespoke service — every piece made entirely for you</p>
+  <a href="contact.html" class="btn-outline">Enquire About Bespoke</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="vowen-logo-footer">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</div>
+      <p class="footer-tagline">luxury bridal accessories, handcrafted with intention</p>
+    </div>
+  </div>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">Earrings</a></li><li><a href="shop.html">Veils</a></li><li><a href="shop.html">Headbands</a></li><li><a href="shop.html">Hairvines</a></li><li><a href="shop.html">The Bridal Bag</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="pricing.html">Bespoke Orders</a></li><li><a href="contact.html">Book Appointment</a></li><li><a href="about.html">The Studio</a></li><li><a href="shop.html">Rental</a></li></ul></div>
+    <div class="footer-col"><h4>Information</h4><ul><li><a href="#">Care Guide</a></li><li><a href="#">Gift Card</a></li><li><a href="#">Stockists</a></li><li><a href="#">Delivery</a></li><li><a href="#">Returns Policy</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@vowen.com">hello@vowen.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 VOWEN. All rights reserved.</p>
+    <div class="footer-social"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Pinterest</a></div>
+  </div>
+</footer>
+
+<script>
+  // Filter
+  const pills = document.querySelectorAll('.pill');
+  const cards = document.querySelectorAll('.product-card');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      cards.forEach((card, i) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !show);
+        if (show) { card.style.transitionDelay = `${i * 40}ms`; card.classList.remove('reveal'); card.classList.add('reveal'); setTimeout(() => card.classList.add('visible'), 50); }
+      });
+    });
+  });
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}), {threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  cards.forEach((c, i) => { c.style.transitionDelay=`${i*55}ms`; c.classList.add('reveal'); observer.observe(c); });
+</script>
+</body>
+</html>

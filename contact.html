@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments & Contact — VOWEN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --nav-bg:      #111111;
+      --bg-white:    #ffffff;
+      --bg-soft:     #faf8f5;
+      --bg-blush:    #f1ebe3;
+      --bg-blush-2:  #ece4db;
+      --text-dark:   #1c1c1c;
+      --text-mid:    #5a5248;
+      --text-light:  #9e8e7e;
+      --gold:        #b8a48e;
+      --gold-dark:   #8c7a6a;
+      --border:      rgba(28,28,28,0.10);
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Jost', -apple-system, sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: var(--bg-white);
+      overflow-x: hidden;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      height: 72px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0;
+    }
+    .nav-right { justify-content: flex-end; gap: 24px; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── VOWEN logo mark ── */
+    .vowen-logo {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.2em;
+    }
+
+    .vowen-flower {
+      position: absolute;
+      width: 13px;
+      height: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* footer / dark-bg logo versions */
+    .vowen-logo-footer {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .vowen-logo-footer .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.28em;
+    }
+    .vowen-logo-footer .vowen-flower {
+      position: absolute;
+      width: 12px;
+      height: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* contact-panel small logo (dark text) */
+    .vowen-logo-dark {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      margin-bottom: 32px;
+    }
+    .vowen-logo-dark .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.22em;
+    }
+    .vowen-logo-dark .vowen-flower {
+      position: absolute;
+      width: 11px;
+      height: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .nav-item { position: relative; }
+    .nav-item > a {
+      display: block;
+      padding: 0 18px;
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      height: 72px;
+      line-height: 72px;
+      transition: color 200ms ease;
+      white-space: nowrap;
+    }
+    .nav-item > a:hover { color: #ffffff; }
+    .nav-item.active > a { color: #ffffff; }
+
+    .nav-action {
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: color 150ms ease;
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+    }
+    .nav-action:hover { color: #ffffff; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Utility ── */
+    .eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      display: block;
+      margin-bottom: 14px;
+    }
+    .section-label {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    /* ─────────────────────────────────────────
+       1. HERO
+    ───────────────────────────────────────── */
+    .hero-contact {
+      background: var(--bg-blush);
+      height: 380px;
+      padding-top: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 110%, rgba(184,164,142,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-contact .eyebrow { color: var(--gold-dark); }
+    .hero-contact h1 {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+    }
+    .hero-contact p {
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--text-mid);
+      max-width: 420px;
+      line-height: 1.75;
+    }
+
+    /* ─────────────────────────────────────────
+       2. TWO-COLUMN
+    ───────────────────────────────────────── */
+    .two-col-wrap {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      min-height: 700px;
+      background: var(--bg-white);
+    }
+
+    /* LEFT: booking form */
+    .booking-col {
+      padding: 80px 64px 80px 72px;
+      border-right: 1px solid var(--border);
+    }
+    .booking-col .section-label { margin-bottom: 8px; }
+    .booking-col h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 2.1rem;
+      letter-spacing: 0.01em;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+    .booking-col .intro-text {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-style: italic;
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+    }
+
+    /* Form */
+    .booking-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .field-group { display: flex; flex-direction: column; gap: 7px; }
+    .field-group label {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .field-group input,
+    .field-group select,
+    .field-group textarea {
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: #fff;
+      width: 100%;
+      outline: none;
+      transition: border-color 200ms ease;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      border-color: var(--gold);
+    }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder {
+      color: var(--text-light);
+      opacity: 0.8;
+    }
+    .field-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239e8e7e' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+      color: var(--text-mid);
+    }
+    .field-group textarea { resize: vertical; min-height: 110px; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--text-dark);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 200ms ease;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { background: var(--gold-dark); }
+
+    .form-note {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      text-align: center;
+      letter-spacing: 0.06em;
+      font-family: var(--font-sans);
+      font-weight: 300;
+      margin-top: 4px;
+    }
+
+    /* RIGHT: contact details */
+    .contact-col {
+      background: var(--bg-soft);
+      padding: 64px 56px 64px 52px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-detail-group { margin-bottom: 28px; }
+    .contact-detail-group .place-name {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--text-dark);
+    }
+    .contact-detail-group .contact-line {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 2;
+      letter-spacing: 0.03em;
+    }
+    .contact-detail-group a.contact-link {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1px;
+      transition: color 150ms ease;
+      font-family: var(--font-serif);
+      font-style: italic;
+    }
+    .contact-detail-group a.contact-link:hover { color: var(--gold-dark); }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .social-link {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 150ms ease;
+    }
+    .social-link:hover { color: var(--text-dark); }
+    .social-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    /* Quick enquiry mini-form */
+    .enquiry-form { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+    .enquiry-form input,
+    .enquiry-form textarea {
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      background: #fff;
+      width: 100%;
+      outline: none;
+      transition: border-color 200ms ease;
+      border-radius: 0;
+      resize: none;
+    }
+    .enquiry-form input::placeholder,
+    .enquiry-form textarea::placeholder { color: var(--text-light); opacity: 0.8; }
+    .enquiry-form input:focus,
+    .enquiry-form textarea:focus { border-color: var(--gold); }
+    .enquiry-form textarea { min-height: 80px; }
+
+    .btn-send {
+      padding: 13px 28px;
+      background: var(--text-dark);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 200ms ease;
+      align-self: flex-start;
+    }
+    .btn-send:hover { background: var(--gold-dark); }
+
+    .enquiry-note {
+      font-size: 0.68rem;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      font-weight: 300;
+      margin-top: 4px;
+      font-style: italic;
+      font-family: var(--font-serif);
+    }
+
+    /* ─────────────────────────────────────────
+       3. APPOINTMENT TYPES
+    ───────────────────────────────────────── */
+    .appt-types {
+      background: var(--bg-blush);
+      padding: 96px 72px;
+      text-align: center;
+    }
+    .appt-types .section-label { justify-content: center; display: block; }
+    .appt-types h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 2.2rem;
+      letter-spacing: 0.01em;
+      color: var(--text-dark);
+      margin-bottom: 56px;
+    }
+
+    .appt-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .appt-card {
+      background: var(--bg-white);
+      padding: 48px 36px 42px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .appt-card.featured {
+      background: var(--text-dark);
+      color: #fff;
+    }
+    .appt-card .card-eyebrow {
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .appt-card.featured .card-eyebrow { color: var(--gold); }
+    .appt-card h3 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 1.55rem;
+      letter-spacing: 0.02em;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .appt-card.featured h3 { color: #fff; }
+    .appt-card .card-price {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--gold-dark);
+      margin-bottom: 24px;
+    }
+    .appt-card.featured .card-price { color: var(--gold); }
+
+    .card-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 36px;
+      flex: 1;
+    }
+    .card-details li {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .card-details li::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .appt-card.featured .card-details li { color: rgba(255,255,255,0.65); }
+    .appt-card.featured .card-details li::before { background: var(--gold); }
+
+    .btn-book-this {
+      padding: 13px 32px;
+      border: 1px solid var(--text-dark);
+      color: var(--text-dark);
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      transition: background 200ms ease, color 200ms ease;
+      cursor: pointer;
+    }
+    .btn-book-this:hover { background: var(--text-dark); color: #fff; }
+    .appt-card.featured .btn-book-this {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .appt-card.featured .btn-book-this:hover {
+      background: var(--gold);
+      color: var(--text-dark);
+    }
+
+    /* ─────────────────────────────────────────
+       4. STUDIO IMAGERY
+    ───────────────────────────────────────── */
+    .studio-imagery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 400px;
+    }
+    .studio-img { overflow: hidden; position: relative; }
+    .studio-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .studio-img:hover img { transform: scale(1.04); }
+
+    /* ─────────────────────────────────────────
+       5. MAP PLACEHOLDER
+    ───────────────────────────────────────── */
+    .map-section {
+      background: var(--bg-soft);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .map-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(184,164,142,0.05) 0px, rgba(184,164,142,0.05) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(90deg, rgba(184,164,142,0.05) 0px, rgba(184,164,142,0.05) 1px, transparent 1px, transparent 40px);
+      pointer-events: none;
+    }
+    .map-pin {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 20px;
+      color: var(--gold-dark);
+    }
+    .map-address {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .map-sub {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      text-transform: uppercase;
+    }
+
+    /* ─────────────────────────────────────────
+       6. FAQ MINI
+    ───────────────────────────────────────── */
+    .faq-section {
+      background: var(--bg-white);
+      padding: 96px 72px;
+      text-align: center;
+    }
+    .faq-section h2 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: 2.1rem;
+      letter-spacing: 0.01em;
+      color: var(--text-dark);
+      margin-bottom: 56px;
+    }
+
+    .faq-list {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .faq-item:last-child { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      background: #111111;
+      color: rgba(255,255,255,0.6);
+      padding: 80px 72px 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 36px;
+    }
+    .footer-brand p {
+      font-size: 0.76rem;
+      font-weight: 300;
+      line-height: 1.9;
+      max-width: 240px;
+      margin-top: 14px;
+      letter-spacing: 0.03em;
+    }
+    .footer-col h4 {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a {
+      font-size: 0.76rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.55);
+      transition: color 150ms ease;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 24px;
+    }
+    .footer-legal a {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      transition: color 150ms ease;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .two-col-wrap { grid-template-columns: 1fr; }
+      .contact-col { padding: 56px 48px; }
+      .booking-col { padding: 64px 48px; }
+      .appt-cards { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-left, .nav-right { display: none; }
+      .booking-col, .contact-col { padding: 48px 28px; }
+      .appt-types, .faq-section { padding: 72px 28px; }
+      .appt-cards { grid-template-columns: 1fr; max-width: 400px; }
+      .studio-imagery { grid-template-columns: 1fr; height: 500px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 60px 28px 32px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════════════════ -->
+  <nav>
+    <ul class="nav-left">
+      <li class="nav-item"><a href="shop.html">Shop</a></li>
+      <li class="nav-item active"><a href="contact.html">Appointments</a></li>
+      <li class="nav-item"><a href="#">Bespoke</a></li>
+    </ul>
+
+    <div class="nav-logo">
+      <a href="index.html">
+        <span class="vowen-logo">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span>
+      </a>
+    </div>
+
+    <ul class="nav-right">
+      <li class="nav-item"><a href="#">Rental</a></li>
+      <li class="nav-item"><a href="blog.html">Blog</a></li>
+      <button class="nav-action">Search</button>
+      <button class="nav-action">Cart (0)</button>
+    </ul>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       1. HERO
+  ════════════════════════════════════════════ -->
+  <section class="hero-contact">
+    <span class="eyebrow reveal">Let's Begin</span>
+    <h1 class="reveal reveal-delay-1">Book an Appointment</h1>
+    <p class="reveal reveal-delay-2">whether you have a question or you're ready to begin your bridal journey, we're here</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       2. TWO-COLUMN: BOOKING + CONTACT
+  ════════════════════════════════════════════ -->
+  <div class="two-col-wrap">
+
+    <!-- LEFT: Booking Form -->
+    <div class="booking-col">
+      <span class="section-label reveal">Book Your Visit</span>
+      <h2 class="reveal reveal-delay-1">Schedule an Appointment</h2>
+      <p class="intro-text reveal reveal-delay-2">all appointments are private and personal — you'll have the studio to yourself</p>
+
+      <form class="booking-form reveal reveal-delay-2" onsubmit="return false;">
+
+        <div class="form-row">
+          <div class="field-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" placeholder="Your first name">
+          </div>
+          <div class="field-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Your last name">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="hello@youremail.com">
+        </div>
+
+        <div class="field-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+44 7700 000 000">
+        </div>
+
+        <div class="field-group">
+          <label for="appt-type">Appointment Type</label>
+          <select id="appt-type" name="appt-type">
+            <option value="" disabled selected>Select an appointment type</option>
+            <option value="virtual">Virtual Consultation — Free</option>
+            <option value="studio">In-Studio Visit — £35</option>
+            <option value="full">Full Bridal Styling — £120</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="field-group">
+            <label for="pref-date">Preferred Date</label>
+            <input type="date" id="pref-date" name="pref-date">
+          </div>
+          <div class="field-group">
+            <label for="pref-time">Preferred Time</label>
+            <select id="pref-time" name="pref-time">
+              <option value="" disabled selected>Select a time slot</option>
+              <option value="morning">Morning 10–12</option>
+              <option value="afternoon">Afternoon 12–3</option>
+              <option value="late">Late Afternoon 3–6</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="wedding-date">Wedding Date</label>
+          <input type="date" id="wedding-date" name="wedding-date">
+        </div>
+
+        <div class="field-group">
+          <label for="heard">How Did You Hear About Us?</label>
+          <select id="heard" name="heard">
+            <option value="" disabled selected>Please select</option>
+            <option value="instagram">Instagram</option>
+            <option value="google">Google</option>
+            <option value="friend">Friend / Family</option>
+            <option value="blog">Wedding Blog</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label for="message">Special Requests / Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us anything that would help us prepare for your visit…"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Request Appointment</button>
+        <p class="form-note">We'll confirm your appointment within 24 hours</p>
+
+      </form>
+    </div>
+
+    <!-- RIGHT: Contact Details -->
+    <div class="contact-col">
+
+      <!-- VOWEN logo -->
+      <a href="index.html">
+        <span class="vowen-logo-dark reveal">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span>
+      </a>
+
+      <!-- Address -->
+      <div class="reveal reveal-delay-1">
+        <span class="section-label">Find Us</span>
+        <div class="contact-detail-group">
+          <div class="place-name">The VOWEN Studio<br>12 Bridal Lane, Fitzrovia<br>London, W1T 3HN</div>
+        </div>
+        <div class="contact-detail-group">
+          <a href="mailto:hello@vowen.com" class="contact-link">hello@vowen.com</a>
+        </div>
+        <div class="contact-detail-group">
+          <div class="contact-line">Monday–Saturday / 10am–6pm<br>Sunday: by appointment only</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Social -->
+      <div class="reveal reveal-delay-2">
+        <span class="section-label">Follow Along</span>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+            Instagram @vowen
+          </a>
+          <a href="#" class="social-link">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="#" class="social-link">
+            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Pinterest
+          </a>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Quick enquiry -->
+      <div class="reveal reveal-delay-3">
+        <span class="section-label">Quick Enquiry</span>
+        <form class="enquiry-form" onsubmit="return false;">
+          <input type="text" name="eq-name" placeholder="Your name">
+          <input type="email" name="eq-email" placeholder="Your email">
+          <textarea name="eq-message" rows="3" placeholder="Your message…"></textarea>
+          <button type="submit" class="btn-send">Send</button>
+        </form>
+        <p class="enquiry-note">For order queries, please include your order number</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       3. APPOINTMENT TYPES
+  ════════════════════════════════════════════ -->
+  <section class="appt-types">
+    <span class="section-label reveal">Experiences</span>
+    <h2 class="reveal reveal-delay-1">Choose Your Experience</h2>
+
+    <div class="appt-cards">
+
+      <!-- Card 1: Virtual -->
+      <div class="appt-card reveal reveal-delay-1">
+        <span class="card-eyebrow">Virtual Consultation</span>
+        <h3>Virtual</h3>
+        <div class="card-price">Free</div>
+        <ul class="card-details">
+          <li>30 minutes</li>
+          <li>Video call</li>
+          <li>Style questionnaire in advance</li>
+          <li>Personalised look-book follow-up</li>
+        </ul>
+        <button class="btn-book-this" onclick="document.getElementById('appt-type').value='virtual'; document.getElementById('appt-type').scrollIntoView({behavior:'smooth'});">Book This</button>
+      </div>
+
+      <!-- Card 2: In-Studio (featured) -->
+      <div class="appt-card featured reveal reveal-delay-2">
+        <span class="card-eyebrow">Most Popular</span>
+        <h3>In-Studio</h3>
+        <div class="card-price">£35</div>
+        <ul class="card-details">
+          <li>60 minutes</li>
+          <li>Private studio access</li>
+          <li>Champagne welcome</li>
+          <li>Full range to try</li>
+          <li>Redeemable against purchase</li>
+        </ul>
+        <button class="btn-book-this" onclick="document.getElementById('appt-type').value='studio'; document.getElementById('appt-type').scrollIntoView({behavior:'smooth'});">Book This</button>
+      </div>
+
+      <!-- Card 3: Full Styling -->
+      <div class="appt-card reveal reveal-delay-3">
+        <span class="card-eyebrow">Full Bridal Styling</span>
+        <h3>Full Styling</h3>
+        <div class="card-price">£120</div>
+        <ul class="card-details">
+          <li>90 minutes</li>
+          <li>Dress & accessory coordination</li>
+          <li>Take-home style notes</li>
+          <li>Complimentary gift</li>
+          <li>Redeemable against purchase</li>
+        </ul>
+        <button class="btn-book-this" onclick="document.getElementById('appt-type').value='full'; document.getElementById('appt-type').scrollIntoView({behavior:'smooth'});">Book This</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       4. STUDIO IMAGERY
+  ════════════════════════════════════════════ -->
+  <div class="studio-imagery">
+    <div class="studio-img">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="VOWEN studio atmosphere">
+    </div>
+    <div class="studio-img">
+      <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80" alt="Bridal accessories at the VOWEN studio">
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       5. MAP PLACEHOLDER
+  ════════════════════════════════════════════ -->
+  <section class="map-section">
+    <svg class="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+      <circle cx="12" cy="9" r="2.5"/>
+    </svg>
+    <p class="map-address reveal">12 Bridal Lane, Fitzrovia, London W1T 3HN</p>
+    <p class="map-sub reveal reveal-delay-1">5 minutes from Goodge Street station</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       6. FAQ MINI
+  ════════════════════════════════════════════ -->
+  <section class="faq-section">
+    <h2 class="reveal">Appointment FAQs</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal reveal-delay-1">
+        <p class="faq-q">Can I bring someone with me?</p>
+        <p class="faq-a">Yes, you're welcome to bring one guest. Our studio is designed as an intimate, private space — an extra pair of eyes (and honest opinions) is always welcome.</p>
+      </div>
+      <div class="faq-item reveal reveal-delay-2">
+        <p class="faq-q">What should I wear?</p>
+        <p class="faq-a">Comfortable clothing you can move in — we'll do the rest. If you have a particular silhouette in mind, nude or skin-toned underlayers can be helpful.</p>
+      </div>
+      <div class="faq-item reveal reveal-delay-3">
+        <p class="faq-q">Can I cancel or reschedule?</p>
+        <p class="faq-a">Yes, up to 48 hours before your appointment. Simply email us at hello@vowen.com and we'll be happy to find another time that suits you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="vowen-logo-footer">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span>
+        <p>Luxury bridal accessories, crafted for the modern bride. Made to be worn, remembered, and cherished.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html">All Accessories</a></li>
+          <li><a href="#">Veils</a></li>
+          <li><a href="#">Headpieces</a></li>
+          <li><a href="#">Jewellery</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="contact.html">Book Appointment</a></li>
+          <li><a href="#">Bespoke</a></li>
+          <li><a href="#">Rental</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Journal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 VOWEN. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       SCROLL REVEAL SCRIPT
+  ════════════════════════════════════════════ -->
+  <script>
+    (function () {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    })();
+  </script>
+
+</body>
+</html>

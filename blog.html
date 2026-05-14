@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Journal — VOWEN Luxury Bridal Accessories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nav-bg:#111111; --bg-white:#ffffff; --bg-soft:#faf8f5; --bg-blush:#f1ebe3;
+      --bg-blush-2:#ece4db; --text-dark:#1c1c1c; --text-mid:#5a5248; --text-light:#9e8e7e;
+      --gold:#b8a48e; --gold-dark:#8c7a6a; --border:rgba(28,28,28,0.10);
+      --font-serif:'Cormorant Garamond',Georgia,serif; --font-sans:'Jost',-apple-system,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-sans);color:var(--text-dark);background:var(--bg-white);overflow-x:hidden;}
+    img{display:block;width:100%;height:100%;object-fit:cover;}
+    a{text-decoration:none;color:inherit;}
+    button{cursor:pointer;border:none;background:none;font-family:inherit;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--nav-bg);height:72px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 40px;}
+    .nav-left,.nav-right{display:flex;align-items:center;list-style:none;}
+    .nav-right{justify-content:flex-end;gap:24px;}
+    .nav-logo a{display:flex;align-items:center;justify-content:center;}
+    .vowen-logo{font-family:var(--font-serif);font-size:1.7rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:#fff;display:inline-flex;align-items:baseline;line-height:1;white-space:nowrap;}
+    .vowen-e{position:relative;display:inline-block;letter-spacing:0;margin-right:0.2em;}
+    .vowen-flower{position:absolute;width:13px;height:18px;left:50%;transform:translateX(-50%);bottom:calc(100% + 3px);pointer-events:none;overflow:visible;}
+    .nav-item{position:relative;}
+    .nav-item>a{display:block;padding:0 18px;font-size:0.62rem;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.78);height:72px;line-height:72px;transition:color 200ms ease;white-space:nowrap;}
+    .nav-item>a:hover,.nav-item>a.active{color:#fff;}
+    .nav-dropdown{position:absolute;top:72px;left:0;background:var(--nav-bg);min-width:210px;list-style:none;opacity:0;visibility:hidden;transform:translateY(-6px);transition:all 220ms ease;border-top:1px solid rgba(255,255,255,0.07);box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+    .nav-item:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+    .nav-dropdown li a{display:block;padding:11px 24px;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 150ms ease,background 150ms ease;}
+    .nav-dropdown li a:hover{color:#fff;background:rgba(255,255,255,0.04);}
+    .nav-action{font-size:0.6rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.7);transition:color 150ms ease;}
+    .nav-action:hover{color:#fff;}
+
+    /* PAGE HERO */
+    .page-hero{margin-top:72px;background:var(--bg-soft);padding:88px 60px 72px;text-align:center;}
+    .page-hero .eyebrow{font-family:var(--font-sans);font-size:0.58rem;font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:20px;}
+    .page-hero h1{font-family:var(--font-serif);font-size:clamp(2.8rem,6vw,5rem);font-weight:300;font-style:italic;color:var(--text-dark);margin-bottom:14px;line-height:1.1;}
+    .page-hero p{font-family:var(--font-serif);font-style:italic;font-size:1.05rem;color:var(--text-mid);margin-bottom:40px;}
+    .filter-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;}
+    .pill{font-family:var(--font-sans);font-size:0.58rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mid);padding:10px 20px;border:1px solid var(--border);cursor:pointer;transition:all 200ms ease;background:#fff;}
+    .pill:hover{border-color:var(--text-dark);color:var(--text-dark);}
+    .pill.active{background:var(--text-dark);color:#fff;border-color:var(--text-dark);}
+
+    /* FEATURED POST */
+    .featured-post{display:grid;grid-template-columns:60% 40%;min-height:560px;}
+    .featured-img{position:relative;overflow:hidden;}
+    .featured-img img{transition:transform 700ms ease;}
+    .featured-post:hover .featured-img img{transform:scale(1.04);}
+    .featured-text{background:var(--bg-blush);display:flex;flex-direction:column;justify-content:center;padding:72px 64px;}
+    .post-category{font-family:var(--font-sans);font-size:0.55rem;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:8px;}
+    .post-date{font-family:var(--font-sans);font-size:0.6rem;font-weight:300;letter-spacing:0.1em;color:var(--text-light);margin-bottom:20px;}
+    .featured-text h2{font-family:var(--font-serif);font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:300;font-style:italic;color:var(--text-dark);line-height:1.3;margin-bottom:18px;}
+    .featured-text p{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-mid);line-height:1.8;margin-bottom:32px;}
+    .read-more{font-family:var(--font-sans);font-size:0.58rem;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-dark);border-bottom:1px solid var(--text-dark);padding-bottom:2px;display:inline-block;transition:color 200ms ease,border-color 200ms ease;}
+    .read-more:hover{color:var(--gold-dark);border-color:var(--gold-dark);}
+
+    /* POST GRID */
+    .posts-section{padding:80px 60px;}
+    .posts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 28px;}
+    .post-card{cursor:pointer;}
+    .post-card.hidden{display:none;}
+    .post-card-img{aspect-ratio:3/2;overflow:hidden;background:var(--bg-blush);margin-bottom:18px;}
+    .post-card-img img{transition:transform 600ms ease;}
+    .post-card:hover .post-card-img img{transform:scale(1.05);}
+    .post-card .post-category{margin-bottom:6px;}
+    .post-card .post-date{margin-bottom:10px;}
+    .post-card h3{font-family:var(--font-serif);font-size:1.2rem;font-weight:400;font-style:italic;color:var(--text-dark);line-height:1.35;margin-bottom:10px;}
+    .post-card p{font-family:var(--font-serif);font-style:italic;font-size:0.92rem;color:var(--text-mid);line-height:1.7;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+    /* NEWSLETTER */
+    .newsletter{background:var(--bg-blush);padding:100px 40px;text-align:center;}
+    .newsletter .eyebrow{font-family:var(--font-sans);font-size:0.58rem;font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:16px;}
+    .newsletter h2{font-family:var(--font-serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;color:var(--text-dark);margin-bottom:10px;}
+    .newsletter p{font-family:var(--font-serif);font-style:italic;font-size:1rem;color:var(--text-mid);margin-bottom:36px;}
+    .form-row{display:flex;max-width:440px;margin:0 auto;}
+    .form-row input{flex:1;border:1px solid var(--border);border-right:none;background:#fff;font-family:var(--font-serif);font-style:italic;font-size:0.95rem;padding:14px 20px;outline:none;color:var(--text-dark);}
+    .form-row input::placeholder{color:var(--text-light);}
+    .form-row input:focus{border-color:var(--gold);}
+    .form-row button{background:var(--text-dark);color:#fff;font-family:var(--font-sans);font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;padding:14px 28px;border:1px solid var(--text-dark);transition:all 220ms ease;}
+    .form-row button:hover{background:#333;}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity 700ms ease,transform 700ms ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* FOOTER */
+    footer{background:var(--nav-bg);padding:72px 60px 40px;color:rgba(255,255,255,0.55);}
+    .footer-top{display:flex;justify-content:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .vowen-logo-footer{font-family:var(--font-serif);font-size:1.5rem;font-weight:300;letter-spacing:0.28em;text-transform:uppercase;color:#fff;display:inline-flex;align-items:baseline;line-height:1;}
+    .vowen-logo-footer .vowen-e{position:relative;display:inline-block;letter-spacing:0;margin-right:0.28em;}
+    .vowen-logo-footer .vowen-flower{position:absolute;width:12px;height:16px;left:50%;transform:translateX(-50%);bottom:calc(100% + 3px);pointer-events:none;overflow:visible;}
+    .footer-tagline{font-family:var(--font-serif);font-style:italic;font-size:0.85rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:6px;}
+    .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-bottom:48px;}
+    .footer-col h4{font-family:var(--font-sans);font-size:0.58rem;font-weight:400;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:16px;}
+    .footer-col ul{list-style:none;}
+    .footer-col ul li{margin-bottom:10px;}
+    .footer-col ul li a{font-family:var(--font-sans);font-size:0.72rem;font-weight:300;color:rgba(255,255,255,0.45);transition:color 150ms ease;}
+    .footer-col ul li a:hover{color:rgba(255,255,255,0.82);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+    .footer-copy{font-size:0.62rem;letter-spacing:0.08em;color:rgba(255,255,255,0.28);}
+    .footer-social{display:flex;gap:20px;}
+    .footer-social a{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.38);transition:color 150ms ease;}
+    .footer-social a:hover{color:rgba(255,255,255,0.78);}
+
+    @media(max-width:900px){.featured-post{grid-template-columns:1fr;} .featured-text{padding:56px 40px;} .posts-grid{grid-template-columns:repeat(2,1fr);} .posts-section{padding:56px 40px;}}
+    @media(max-width:600px){nav{padding:0 20px;} .nav-left{display:none;} .page-hero{padding:64px 24px 56px;} .posts-grid{grid-template-columns:1fr;} .posts-section{padding:40px 24px;} .footer-grid{grid-template-columns:1fr 1fr;} footer{padding:48px 24px 32px;} .form-row{flex-direction:column;} .form-row input{border-right:1px solid var(--border);border-bottom:none;}}
+    @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul class="nav-left">
+    <li class="nav-item"><a href="shop.html">Shop</a>
+      <ul class="nav-dropdown">
+        <li><a href="shop.html">Earrings</a></li><li><a href="shop.html">Veils</a></li>
+        <li><a href="shop.html">Headbands</a></li><li><a href="shop.html">Hairvines</a></li>
+        <li><a href="shop.html">The Bridal Bag</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a href="contact.html">Appointments</a>
+      <ul class="nav-dropdown">
+        <li><a href="contact.html">Book Appointment</a></li>
+        <li><a href="about.html">The Studio</a></li>
+        <li><a href="about.html">Meet the Team</a></li>
+      </ul>
+    </li>
+    <li class="nav-item"><a href="pricing.html">Bespoke</a></li>
+  </ul>
+  <div class="nav-logo">
+    <a href="index.html"><span class="vowen-logo">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span></a>
+  </div>
+  <div class="nav-right">
+    <li class="nav-item"><a href="about.html">Our Story</a></li>
+    <li class="nav-item"><a href="blog.html" class="active">Journal</a></li>
+    <button class="nav-action">Search</button>
+    <button class="nav-action">Cart (0)</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="page-hero">
+  <p class="eyebrow">VOWEN</p>
+  <h1>The Journal</h1>
+  <p>stories, styling advice, and behind the scenes from our british studio</p>
+  <div class="filter-pills">
+    <button class="pill active" data-filter="all">All</button>
+    <button class="pill" data-filter="bridal-style">Bridal Style</button>
+    <button class="pill" data-filter="behind-scenes">Behind the Scenes</button>
+    <button class="pill" data-filter="how-to-wear">How to Wear</button>
+    <button class="pill" data-filter="care-guides">Care Guides</button>
+    <button class="pill" data-filter="press">Press</button>
+  </div>
+</div>
+
+<!-- Featured Post -->
+<article class="featured-post reveal">
+  <div class="featured-img">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80" alt="Bridal earrings style guide" loading="lazy">
+  </div>
+  <div class="featured-text">
+    <p class="post-category">Bridal Style</p>
+    <p class="post-date">May 2026</p>
+    <h2>How to Choose Your Bridal Earrings: A Complete Style Guide</h2>
+    <p>The right earring can frame a face, complement a neckline, and become the piece you reach for again and again long after the wedding day. Here's how to find yours.</p>
+    <a href="#" class="read-more">Read the full story →</a>
+  </div>
+</article>
+
+<!-- Post Grid -->
+<section class="posts-section">
+  <div class="posts-grid" id="postsGrid">
+
+    <article class="post-card" data-category="bridal-style">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=600&q=80" alt="Cathedral Veil" loading="lazy"></div>
+      <p class="post-category">Bridal Style</p>
+      <p class="post-date">April 2026</p>
+      <h3>The Art of the Cathedral Veil</h3>
+      <p>Long, dramatic, and endlessly romantic — the cathedral veil is having a moment. We explore its history and how to wear it.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="behind-scenes">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1573408301185-9519eb7ece29?w=600&q=80" alt="Making the Emma Studs" loading="lazy"></div>
+      <p class="post-category">Behind the Scenes</p>
+      <p class="post-date">April 2026</p>
+      <h3>Behind the Scenes: Making the Emma Studs</h3>
+      <p>From the first sketch to the finished piece — we document the full making process of our most-loved stud earring.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="how-to-wear">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1596944924591-6f11a42e4e9d?w=600&q=80" alt="Hairvine styling" loading="lazy"></div>
+      <p class="post-category">How to Wear</p>
+      <p class="post-date">March 2026</p>
+      <h3>How to Wear a Hairvine: 5 Ways</h3>
+      <p>From swept updo to loose waves, the hairvine is one of the most versatile bridal accessories. We show you five distinct ways to style it.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="care-guides">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80" alt="Pearl care" loading="lazy"></div>
+      <p class="post-category">Care Guides</p>
+      <p class="post-date">March 2026</p>
+      <h3>Caring for Your Pearl Accessories</h3>
+      <p>Pearls are living gems. With a little attention, they'll stay luminous for a lifetime. Here's everything you need to know.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="bridal-style">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="2026 Bridal Trends" loading="lazy"></div>
+      <p class="post-category">Bridal Style</p>
+      <p class="post-date">February 2026</p>
+      <h3>Spring 2026 Bridal Trends We Love</h3>
+      <p>Sculptural forms, soft metallics, and a return to heirloom sensibility — these are the bridal accessory trends defining this season.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="behind-scenes">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80" alt="London Studio" loading="lazy"></div>
+      <p class="post-category">Behind the Scenes</p>
+      <p class="post-date">February 2026</p>
+      <h3>A Visit to Our London Studio</h3>
+      <p>We open the doors to Fitzrovia — the light, the workbenches, the walls covered in sketches and swatches. Come in.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="bridal-style">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=600&q=80" alt="Minimal Bridal" loading="lazy"></div>
+      <p class="post-category">Bridal Style</p>
+      <p class="post-date">January 2026</p>
+      <h3>Minimal Bridal: Less is More</h3>
+      <p>The case for restraint — why a single piece, chosen with intention, always outperforms a full set of showpieces.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="press">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1588444837495-c6cfeb53f32d?w=600&q=80" alt="Gift guide" loading="lazy"></div>
+      <p class="post-category">Press</p>
+      <p class="post-date">December 2025</p>
+      <h3>VOWEN in Vogue Weddings: Our Gift Guide Picks</h3>
+      <p>Three of our pieces made the Vogue Weddings gift guide this year. Here's the full story behind each one.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="post-card" data-category="behind-scenes">
+      <div class="post-card-img"><img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80" alt="Pearl sourcing" loading="lazy"></div>
+      <p class="post-category">Behind the Scenes</p>
+      <p class="post-date">November 2025</p>
+      <h3>How We Source Our Freshwater Pearls</h3>
+      <p>Every pearl in a VOWEN piece is traced back to a sustainable farm. We travelled to understand the full journey — from oyster to setting.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter reveal">
+  <p class="eyebrow">The Journal</p>
+  <h2>Never Miss a Story</h2>
+  <p>our journal arrives in your inbox once a month — no noise, just beauty</p>
+  <form class="form-row" onsubmit="return false">
+    <input type="email" placeholder="your email address">
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="vowen-logo-footer">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</div>
+      <p class="footer-tagline">luxury bridal accessories, handcrafted with intention</p>
+    </div>
+  </div>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">Earrings</a></li><li><a href="shop.html">Veils</a></li><li><a href="shop.html">Headbands</a></li><li><a href="shop.html">The Bridal Bag</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="pricing.html">Bespoke</a></li><li><a href="contact.html">Book Appointment</a></li><li><a href="about.html">The Studio</a></li></ul></div>
+    <div class="footer-col"><h4>Information</h4><ul><li><a href="#">Care Guide</a></li><li><a href="#">Delivery</a></li><li><a href="#">Returns</a></li><li><a href="#">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:hello@vowen.com">hello@vowen.com</a></li><li><a href="#">Instagram</a></li><li><a href="#">Pinterest</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 VOWEN. All rights reserved.</p>
+    <div class="footer-social"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Pinterest</a></div>
+  </div>
+</footer>
+
+<script>
+  // Category filter
+  const pills = document.querySelectorAll('.pill');
+  const cards = document.querySelectorAll('.post-card');
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}), {threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  cards.forEach((c,i) => { c.style.transitionDelay=`${i*60}ms`; c.classList.add('reveal'); obs.observe(c); });
+</script>
+</body>
+</html>

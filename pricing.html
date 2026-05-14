@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — VOWEN Luxury Bridal Accessories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --nav-bg:      #111111;
+      --bg-white:    #ffffff;
+      --bg-soft:     #faf8f5;
+      --bg-blush:    #f1ebe3;
+      --bg-blush-2:  #ece4db;
+      --text-dark:   #1c1c1c;
+      --text-mid:    #5a5248;
+      --text-light:  #9e8e7e;
+      --gold:        #b8a48e;
+      --gold-dark:   #8c7a6a;
+      --border:      rgba(28,28,28,0.10);
+      --font-serif:  'Cormorant Garamond', Georgia, serif;
+      --font-sans:   'Jost', -apple-system, sans-serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-dark);
+      background: var(--bg-white);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--nav-bg);
+      height: 72px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-right { justify-content: flex-end; gap: 4px; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── VOWEN logo ── */
+    .vowen-logo {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.2em;
+    }
+    .vowen-flower {
+      position: absolute;
+      width: 13px;
+      height: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    /* footer logo */
+    .vowen-logo-footer {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: baseline;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .vowen-logo-footer .vowen-e {
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0;
+      margin-right: 0.28em;
+    }
+    .vowen-logo-footer .vowen-flower {
+      position: absolute;
+      width: 12px;
+      height: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 3px);
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+    .nav-item > a {
+      display: block;
+      padding: 0 16px;
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+      height: 72px;
+      line-height: 72px;
+      transition: color 200ms ease;
+      white-space: nowrap;
+    }
+    .nav-item > a:hover,
+    .nav-item > a.active { color: #ffffff; }
+    .nav-item > a.active {
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .nav-action {
+      display: flex;
+      align-items: center;
+      height: 72px;
+      padding: 0 14px;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: color 150ms ease;
+      background: none;
+      border: none;
+      font-family: var(--font-sans);
+    }
+    .nav-action:hover { color: #ffffff; }
+
+    /* cart badge */
+    .cart-wrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .cart-count {
+      font-size: 0.55rem;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ══════════════════════════════
+       1. PAGE HERO
+    ══════════════════════════════ */
+    .page-hero {
+      margin-top: 72px;
+      height: 400px;
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 120%, rgba(184,164,142,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      padding: 0 32px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 22px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+    }
+
+    .page-hero-sub {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* divider */
+    .gold-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 22px;
+    }
+
+    /* ══════════════════════════════
+       2. PRODUCT PRICE RANGES
+    ══════════════════════════════ */
+    .section {
+      padding: 96px 48px;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 14px;
+    }
+    .section-header p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--text-light);
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .product-card {
+      background: var(--bg-white);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: background 220ms ease;
+    }
+    .product-card:hover {
+      background: var(--bg-soft);
+    }
+
+    .product-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .product-name {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      letter-spacing: 0.01em;
+    }
+
+    .product-price {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold-dark);
+      letter-spacing: -0.01em;
+    }
+
+    .product-desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.65;
+      letter-spacing: 0.03em;
+    }
+
+    /* ══════════════════════════════
+       3. BESPOKE TIERS
+    ══════════════════════════════ */
+    .bespoke-section {
+      background: var(--bg-blush);
+      padding: 96px 48px;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tier-card {
+      background: var(--bg-white);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid var(--border);
+      transition: box-shadow 280ms ease, transform 280ms ease;
+    }
+    .tier-card:hover {
+      box-shadow: 0 24px 60px rgba(28,28,28,0.09);
+      transform: translateY(-3px);
+    }
+    .tier-card.featured {
+      border-color: var(--gold);
+    }
+
+    .tier-badge {
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold-dark);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      white-space: nowrap;
+    }
+
+    .tier-name {
+      font-family: var(--font-serif);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .tier-price {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .tier-price-label {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--text-light);
+      letter-spacing: 0.06em;
+      margin-bottom: 32px;
+    }
+
+    .tier-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    .tier-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 40px;
+      flex: 1;
+    }
+    .tier-features li {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.5;
+      padding-left: 18px;
+      position: relative;
+    }
+    .tier-features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--text-dark);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background 220ms ease, transform 200ms ease;
+    }
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 13px 32px;
+      border: 1px solid var(--text-dark);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+    }
+    .btn-outline:hover {
+      background: var(--text-dark);
+      color: #fff;
+    }
+
+    /* ══════════════════════════════
+       4. APPOINTMENT PACKAGES
+    ══════════════════════════════ */
+    .appt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .appt-card {
+      padding: 48px 36px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: box-shadow 260ms ease;
+    }
+    .appt-card:hover {
+      box-shadow: 0 16px 48px rgba(28,28,28,0.07);
+    }
+
+    .appt-label {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 16px;
+    }
+
+    .appt-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .appt-price {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .appt-note {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--text-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+
+    .appt-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 24px;
+    }
+
+    .appt-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 36px;
+      flex: 1;
+    }
+    .appt-features li {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.5;
+      padding-left: 16px;
+      position: relative;
+    }
+    .appt-features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ══════════════════════════════
+       5. FAQ ACCORDION
+    ══════════════════════════════ */
+    .faq-section {
+      background: var(--bg-soft);
+      padding: 96px 48px;
+    }
+
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 26px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 24px;
+    }
+
+    .faq-q-text {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 220ms ease, border-color 220ms ease;
+    }
+    .faq-question:hover .faq-icon,
+    .faq-item.open .faq-icon {
+      background: var(--text-dark);
+      border-color: var(--text-dark);
+    }
+    .faq-icon svg {
+      stroke: var(--text-dark);
+      transition: stroke 220ms ease, transform 320ms ease;
+    }
+    .faq-question:hover .faq-icon svg,
+    .faq-item.open .faq-icon svg {
+      stroke: #fff;
+    }
+    .faq-item.open .faq-icon svg {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 420ms cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity   320ms ease;
+      opacity: 0;
+    }
+    .faq-item.open .faq-answer {
+      opacity: 1;
+    }
+
+    .faq-answer-inner {
+      padding: 0 0 28px 0;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+      max-width: 640px;
+    }
+
+    /* ══════════════════════════════
+       6. CTA BAND
+    ══════════════════════════════ */
+    .cta-band {
+      background: var(--nav-bg);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .cta-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #fff;
+      margin-bottom: 40px;
+    }
+
+    .btn-gold {
+      display: inline-block;
+      padding: 15px 44px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: background 240ms ease, color 240ms ease;
+    }
+    .btn-gold:hover {
+      background: var(--gold);
+      color: var(--nav-bg);
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: var(--nav-bg);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 72px 48px 40px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 36px;
+    }
+
+    .footer-brand p {
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.45);
+      max-width: 260px;
+      margin-top: 12px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .footer-col ul li a {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.03em;
+      transition: color 150ms ease;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.06em;
+    }
+
+    /* ══════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 100ms; }
+    .reveal-delay-2 { transition-delay: 200ms; }
+    .reveal-delay-3 { transition-delay: 300ms; }
+    .reveal-delay-4 { transition-delay: 400ms; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tier-grid {
+        grid-template-columns: 1fr;
+        max-width: 540px;
+      }
+      .appt-grid {
+        grid-template-columns: 1fr;
+        max-width: 540px;
+        margin: 0 auto;
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-left { display: none; }
+      .nav-right { gap: 8px; }
+      .section, .bespoke-section, .faq-section, .cta-band { padding: 64px 24px; }
+      .product-grid { grid-template-columns: 1fr; }
+      footer { padding: 56px 24px 32px; }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+      .page-hero { height: auto; padding: 80px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       NAVIGATION
+  ══════════════════════════════ -->
+  <nav>
+    <!-- Left -->
+    <ul class="nav-left">
+      <li class="nav-item"><a href="shop.html">Shop</a></li>
+      <li class="nav-item"><a href="contact.html">Appointments</a></li>
+      <li class="nav-item"><a href="pricing.html" class="active">Bespoke</a></li>
+    </ul>
+
+    <!-- Centre Logo -->
+    <div class="nav-logo">
+      <a href="index.html">
+        <span class="vowen-logo">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</span>
+      </a>
+    </div>
+
+    <!-- Right -->
+    <ul class="nav-right">
+      <li class="nav-item"><a href="#">Rental</a></li>
+      <li class="nav-item"><a href="blog.html">Blog</a></li>
+      <li>
+        <button class="nav-action" aria-label="Search">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+        </button>
+      </li>
+      <li>
+        <button class="nav-action" aria-label="Cart">
+          <span class="cart-wrap">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1h2l2 8h7l1.5-5H4"/><circle cx="6.5" cy="12.5" r="1"/><circle cx="11.5" cy="12.5" r="1"/></svg>
+            <span class="cart-count">0</span>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════
+       1. PAGE HERO
+  ══════════════════════════════ -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <p class="hero-eyebrow">Transparent Pricing</p>
+      <div class="gold-rule"></div>
+      <h1>Bespoke &amp; Services</h1>
+      <p class="page-hero-sub">every piece we make carries the same care — whether from our collection or made entirely for you</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       2. PRODUCT PRICE RANGES
+  ══════════════════════════════ -->
+  <section class="section" style="background:var(--bg-white);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <h2>Our Collection</h2>
+        <div class="gold-rule" style="margin-top:18px;"></div>
+        <p style="margin-top:16px;">Starting prices — every piece is handmade and may be customised to order</p>
+      </div>
+
+      <div class="product-grid">
+
+        <div class="product-card reveal reveal-delay-1">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Earrings</div>
+          <div class="product-price">from £65</div>
+          <div class="product-desc">freshwater pearl, gold &amp; silver studs, drops and hoops</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-2">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Veils</div>
+          <div class="product-price">from £165</div>
+          <div class="product-desc">silk, tulle, and embellished — handmade to your exact length</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-3">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Headbands</div>
+          <div class="product-price">from £75</div>
+          <div class="product-desc">wire, crystal, and floral constructions</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-1">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Hairvines</div>
+          <div class="product-price">from £140</div>
+          <div class="product-desc">draped pearl and crystal designs</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-2">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Haircombs</div>
+          <div class="product-price">from £55</div>
+          <div class="product-desc">pearl, crystal, and pressed floral</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-3">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Hairpins</div>
+          <div class="product-price">from £35</div>
+          <div class="product-desc">delicate accent pins, sold individually or as sets</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-1">
+          <div class="product-icon">✦</div>
+          <div class="product-name">Neck Scarves</div>
+          <div class="product-price">from £45</div>
+          <div class="product-desc">silk and chiffon in ivory and blush</div>
+        </div>
+
+        <div class="product-card reveal reveal-delay-2">
+          <div class="product-icon">✦</div>
+          <div class="product-name">The Bridal Bag</div>
+          <div class="product-price">from £185</div>
+          <div class="product-desc">embroidered silk with monogramming available</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       3. BESPOKE TIERS
+  ══════════════════════════════ -->
+  <section class="bespoke-section">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <h2>Bespoke Commission</h2>
+        <div class="gold-rule" style="margin-top:18px;"></div>
+        <p style="margin-top:16px;">work with us to design something entirely unique</p>
+      </div>
+
+      <div class="tier-grid">
+
+        <!-- Studio (featured) -->
+        <div class="tier-card featured reveal reveal-delay-1">
+          <div class="tier-badge">Most Popular</div>
+          <p class="tier-name">Studio</p>
+          <div class="tier-price">£250</div>
+          <p class="tier-price-label">starting price</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>Initial consultation — virtual or in-person</li>
+            <li>1 design concept</li>
+            <li>2 revision rounds</li>
+            <li>Handcrafted piece in chosen materials</li>
+            <li>Certificate of authenticity</li>
+          </ul>
+          <a href="contact.html" class="btn-primary">Begin Your Commission</a>
+        </div>
+
+        <!-- Collection -->
+        <div class="tier-card reveal reveal-delay-2">
+          <p class="tier-name">Collection</p>
+          <div class="tier-price">£480</div>
+          <p class="tier-price-label">starting price</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>All Studio tier benefits</li>
+            <li>3 design concepts</li>
+            <li>Unlimited revisions</li>
+            <li>Full material sample pack posted to you</li>
+            <li>Priority production slot</li>
+            <li>Bespoke packaging</li>
+          </ul>
+          <a href="contact.html" class="btn-primary">Begin Your Commission</a>
+        </div>
+
+        <!-- Archive -->
+        <div class="tier-card reveal reveal-delay-3">
+          <div class="tier-badge" style="background:var(--text-mid);">Most Exclusive</div>
+          <p class="tier-name">Archive</p>
+          <div class="tier-price">£900</div>
+          <p class="tier-price-label">starting price</p>
+          <div class="tier-divider"></div>
+          <ul class="tier-features">
+            <li>Everything in Collection tier</li>
+            <li>In-person design sessions at our London studio</li>
+            <li>Bespoke jewellery &amp; accessories set — up to 4 pieces</li>
+            <li>Dedicated studio liaison</li>
+            <li>Handwritten notes on materials</li>
+          </ul>
+          <a href="contact.html" class="btn-outline">Enquire</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       4. APPOINTMENT PACKAGES
+  ══════════════════════════════ -->
+  <section class="section" style="background:var(--bg-white);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <h2>Studio Appointments</h2>
+        <div class="gold-rule" style="margin-top:18px;"></div>
+      </div>
+
+      <div class="appt-grid">
+
+        <div class="appt-card reveal reveal-delay-1">
+          <p class="appt-label">Virtual</p>
+          <h3 class="appt-title">Virtual Consultation</h3>
+          <div class="appt-price">Free</div>
+          <p class="appt-note">30 minutes</p>
+          <div class="appt-divider"></div>
+          <ul class="appt-features">
+            <li>30 min video call</li>
+            <li>Style questionnaire</li>
+            <li>Personalised look-book</li>
+          </ul>
+          <a href="contact.html" class="btn-primary">Book Now</a>
+        </div>
+
+        <div class="appt-card reveal reveal-delay-2">
+          <p class="appt-label">In-Studio</p>
+          <h3 class="appt-title">In-Studio Visit</h3>
+          <div class="appt-price">£35</div>
+          <p class="appt-note">redeemable against purchase &nbsp;·&nbsp; 60 minutes</p>
+          <div class="appt-divider"></div>
+          <ul class="appt-features">
+            <li>Private appointment at our London studio</li>
+            <li>Champagne welcome</li>
+            <li>Full collection to try</li>
+          </ul>
+          <a href="contact.html" class="btn-primary">Book Now</a>
+        </div>
+
+        <div class="appt-card reveal reveal-delay-3">
+          <p class="appt-label">Full Styling</p>
+          <h3 class="appt-title">Full Bridal Styling</h3>
+          <div class="appt-price">£120</div>
+          <p class="appt-note">redeemable against purchase &nbsp;·&nbsp; 90 minutes</p>
+          <div class="appt-divider"></div>
+          <ul class="appt-features">
+            <li>Dedicated styling session</li>
+            <li>Dress &amp; accessory coordination</li>
+            <li>Take-home style notes</li>
+            <li>Complimentary gift</li>
+          </ul>
+          <a href="contact.html" class="btn-primary">Book Now</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       5. FAQ ACCORDION
+  ══════════════════════════════ -->
+  <section class="faq-section">
+    <div class="section-inner">
+      <div class="section-header reveal" style="margin-bottom:52px;">
+        <h2>Common Questions</h2>
+        <div class="gold-rule" style="margin-top:18px;"></div>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">How long does a bespoke commission take?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Most bespoke commissions take 6–8 weeks from your initial consultation to delivery. More complex pieces — such as our Archive tier sets — may take up to 10 weeks. We'll always give you a clear timeline before we begin, and our dedicated studio liaison keeps you updated at every stage.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Do you ship internationally?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes — we ship worldwide. Every order is sent via a tracked, insured courier and packed with our signature tissue, ribbon, and care card. International delivery times vary by destination, but we'll send you full tracking details as soon as your piece leaves our studio.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Can I return a bespoke item?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Because every bespoke piece is made entirely for you, we're unable to accept returns. That said, your happiness is our absolute priority. We work closely with you through every revision round, and we won't close the commission until you're completely satisfied with the result.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">What materials do you use?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              We source only the finest materials: freshwater and baroque pearls, Swarovski and hand-cut crystals, 18k gold-filled and sterling silver wire, pure silk tulle and chiffon, and hand-pressed botanicals. All materials are ethically sourced. For bespoke commissions, a sample pack is available with our Collection and Archive tiers so you can feel each option before we begin.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Do you offer payment plans?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes. For orders over £300 we offer a 3-instalment payment plan at no extra cost: one third at booking, one third at the midpoint approval stage, and the final third before dispatch. Simply mention this when you get in touch and we'll set it up for you.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">How do I care for my accessories?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Each piece comes with a printed care card tailored to its materials. In general: store in the dust bag provided, away from direct sunlight and humidity; avoid contact with perfume, hairspray, and oils; clean pearls gently with a dry soft cloth. Silk veils should be steamed on a low setting, never ironed. For metal components, a silver polishing cloth will keep them bright.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Can I see pieces before buying?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Absolutely. Our In-Studio Visit and Full Bridal Styling appointments both give you the opportunity to handle and try our full range in our London studio. If you're not local, our Virtual Consultation includes a curated look-book and we can arrange short-term loan samples for a small refundable deposit.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Do you offer gift wrapping?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke-width="1.4" stroke-linecap="round"><line x1="5.5" y1="1" x2="5.5" y2="10"/><line x1="1" y1="5.5" x2="10" y2="5.5"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes — every VOWEN order arrives beautifully presented as standard. Each piece is wrapped in soft tissue, nestled in our signature ivory gift box, and tied with a satin ribbon. A handwritten note card is included on request. No additional charge for gift presentation.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       6. CTA BAND
+  ══════════════════════════════ -->
+  <section class="cta-band">
+    <p class="cta-eyebrow">Take the first step</p>
+    <h2 class="cta-heading reveal">ready to begin?</h2>
+    <a href="contact.html" class="btn-gold reveal reveal-delay-1">Book a Consultation</a>
+  </section>
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="vowen-logo-footer">VOW<span class="vowen-e"><svg class="vowen-flower" viewBox="0 0 20 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="0.85" stroke-linecap="round" stroke-linejoin="round"><path d="M10,25 C9.5,19 10,12 10,7"/><path d="M10,7 C7.5,0.5 1,1.5 1.5,7.5 C4.5,9.5 8,9 10,7"/><path d="M10,7 C12.5,0.5 19,1.5 18.5,7.5 C15.5,9.5 12,9 10,7"/><path d="M10,7 C8.5,3 10,0.5 11.5,3 C11,4.5 10,6 10,7"/></svg>E</span>N</div>
+          <p>Luxury bridal accessories, handcrafted in London. Each piece made with intention, worn with joy.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Accessories</a></li>
+            <li><a href="shop.html">Veils</a></li>
+            <li><a href="shop.html">Hair Accessories</a></li>
+            <li><a href="shop.html">Jewellery</a></li>
+            <li><a href="shop.html">The Bridal Bag</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="pricing.html">Bespoke Commission</a></li>
+            <li><a href="pricing.html">Studio Appointments</a></li>
+            <li><a href="#">Rental</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="about.html">About VOWEN</a></li>
+            <li><a href="blog.html">Journal</a></li>
+            <li><a href="#">Stockists</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2025 VOWEN. All rights reserved.</span>
+        <span>Handcrafted in London</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════
+       JAVASCRIPT
+  ══════════════════════════════ -->
+  <script>
+    /* ── Scroll Reveal ── */
+    (function () {
+      const revealEls = document.querySelectorAll('.reveal');
+      if (!revealEls.length) return;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      revealEls.forEach((el) => io.observe(el));
+    })();
+
+    /* ── FAQ Accordion ── */
+    (function () {
+      const items = document.querySelectorAll('.faq-item');
+
+      items.forEach((item) => {
+        const btn    = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        // Set initial height
+        answer.style.maxHeight = '0px';
+
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+
+          // Close all
+          items.forEach((other) => {
+            if (other !== item && other.classList.contains('open')) {
+              other.classList.remove('open');
+              other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+              other.querySelector('.faq-answer').style.maxHeight = '0px';
+            }
+          });
+
+          // Toggle clicked
+          if (isOpen) {
+            item.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = '0px';
+          } else {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+            // Use scrollHeight for natural height
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
