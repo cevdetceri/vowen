@@ -2,35 +2,23 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronDown, Download, Menu, X } from "lucide-react";
+import { ShoppingBag, Search, Menu, X, ChevronDown } from "lucide-react";
 
-function CevoMark({ size = 26 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 28 28" fill="none">
-      <path d="M6 4L24 14L6 24V18.5L18 14L6 9.5V4Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-const navLinks = [
-  { label: "Product", href: "#features", hasDropdown: false },
-  { label: "Use Cases", href: "#try-cevo", hasDropdown: true },
-  { label: "Pricing", href: "#pricing", hasDropdown: false },
-  { label: "Blog", href: "#blog", hasDropdown: false },
-  { label: "Resources", href: "#resources", hasDropdown: true },
+const shopCategories = [
+  "Earrings",
+  "Veils",
+  "Neck Scarves & Bows",
+  "Headbands",
+  "Hairvines",
+  "Haircombs",
+  "Hairpins",
+  "The Bridal Bag",
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Mobil menü açıkken scroll kilit
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -38,101 +26,129 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-4 transition-all duration-300 ${
-          scrolled || mobileOpen
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100/80"
-            : "bg-transparent"
-        }`}
-      >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 text-[#0d0d0d] hover:opacity-80 transition-opacity">
-          <CevoMark />
-          <span className="font-display font-semibold text-[17px] tracking-tight">
-            CEVO
-          </span>
-        </Link>
-
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="flex items-center gap-1 text-[13.5px] text-gray-600 hover:text-black transition-colors font-sans"
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#111111] text-white">
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-6 md:px-10 h-[60px]">
+          {/* Left: hamburger (mobile) + shop dropdown (desktop) */}
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => setMobileOpen((o) => !o)}
+              className="md:hidden p-1"
+              aria-label="Toggle menu"
             >
-              {link.label}
-              {link.hasDropdown && (
-                <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-              )}
-            </a>
-          ))}
-        </div>
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
 
-        {/* Sağ: Desktop CTA + Mobil hamburger */}
-        <div className="flex items-center gap-3">
-          <a
-            href="#try-cevo"
-            className="flex items-center gap-2 bg-[#0d0d0d] text-white text-[13px] font-medium px-5 py-2.5 rounded-full hover:bg-[#222] transition-all active:scale-95"
-          >
-            <Download className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Download</span>
-          </a>
+            {/* Desktop nav */}
+            <div className="hidden md:flex items-center gap-7">
+              <div className="relative group">
+                <button
+                  className="flex items-center gap-1 text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+                  onMouseEnter={() => setShopOpen(true)}
+                  onMouseLeave={() => setShopOpen(false)}
+                >
+                  Shop <ChevronDown className="w-3 h-3" />
+                </button>
+                {shopOpen && (
+                  <div
+                    className="absolute top-full left-0 pt-4"
+                    onMouseEnter={() => setShopOpen(true)}
+                    onMouseLeave={() => setShopOpen(false)}
+                  >
+                    <div className="bg-[#111] border border-white/10 min-w-[200px] py-3">
+                      {shopCategories.map((cat) => (
+                        <a
+                          key={cat}
+                          href="#shop"
+                          className="block px-5 py-2 text-[11px] tracking-[0.15em] uppercase text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-inter"
+                        >
+                          {cat}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              {["Appointments", "Bespoke", "Rental"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                className="text-[12px] tracking-[0.18em] uppercase font-inter hover:text-[#b89a72] transition-colors"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
 
-          {/* Hamburger — sadece mobilde */}
-          <button
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-label={mobileOpen ? "Menüyü kapat" : "Menüyü aç"}
-            className="md:hidden flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 transition-colors text-[#0d0d0d]"
+          {/* Centre: logo */}
+          <Link
+            href="/"
+            className="absolute left-1/2 -translate-x-1/2 font-cormorant text-[22px] md:text-[26px] font-light tracking-[0.35em] uppercase hover:text-[#b89a72] transition-colors"
+            style={{ fontFamily: "var(--font-cormorant)" }}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            GAMZE
+          </Link>
+
+          {/* Right: search + bag */}
+          <div className="flex items-center gap-4">
+            <button aria-label="Search" className="hover:text-[#b89a72] transition-colors">
+              <Search className="w-[18px] h-[18px]" />
+            </button>
+            <button aria-label="Shopping bag" className="hover:text-[#b89a72] transition-colors">
+              <ShoppingBag className="w-[18px] h-[18px]" />
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Mobil menü paneli */}
+      {/* Mobile menu */}
       <div
         className={`fixed inset-0 z-40 md:hidden transition-all duration-300 ${
           mobileOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
-        {/* Backdrop */}
         <div
-          className={`absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
             mobileOpen ? "opacity-100" : "opacity-0"
           }`}
           onClick={() => setMobileOpen(false)}
         />
-
-        {/* Panel */}
         <div
-          className={`absolute top-[65px] left-0 right-0 bg-white border-b border-gray-100 shadow-lg transition-all duration-300 ${
-            mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-3"
+          className={`absolute top-[60px] left-0 right-0 bg-[#111] border-t border-white/10 transition-all duration-300 ${
+            mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
           }`}
         >
-          <div className="px-6 py-4 flex flex-col gap-1">
-            {navLinks.map((link) => (
+          <div className="px-6 py-6 flex flex-col gap-1">
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-2 font-inter">Shop</p>
+            {shopCategories.map((cat) => (
               <a
-                key={link.label}
-                href={link.href}
+                key={cat}
+                href="#shop"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between py-3.5 border-b border-gray-50 last:border-0 text-[15px] text-gray-700 hover:text-black font-sans transition-colors"
+                className="py-2.5 text-[13px] tracking-[0.12em] uppercase text-gray-300 hover:text-white font-inter border-b border-white/5"
               >
-                <span>{link.label}</span>
-                {link.hasDropdown && (
-                  <ChevronDown className="h-4 w-4 opacity-40" />
-                )}
+                {cat}
               </a>
             ))}
-
-            <a
-              href="#try-cevo"
-              onClick={() => setMobileOpen(false)}
-              className="mt-3 flex items-center justify-center gap-2 bg-[#0d0d0d] text-white text-[14px] font-medium px-6 py-3.5 rounded-full hover:bg-[#222] transition-all active:scale-95"
-            >
-              <Download className="h-4 w-4" />
-              Download for Windows
-            </a>
+            <div className="mt-4 flex flex-col gap-1">
+              {["Appointments", "Bespoke", "Rental", "Contact Us"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  onClick={() => setMobileOpen(false)}
+                  className="py-2.5 text-[13px] tracking-[0.12em] uppercase text-white hover:text-[#b89a72] font-inter"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

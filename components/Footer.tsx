@@ -1,80 +1,100 @@
-function CevoMark() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
-      <path d="M6 4L24 14L6 24V18.5L18 14L6 9.5V4Z" fill="currentColor" />
-    </svg>
-  );
-}
+import Link from "next/link";
+import { Instagram, Facebook } from "lucide-react";
 
-const footerLinks: Record<string, string[]> = {
-  Product: ["Overview", "Features", "Pricing", "Changelog", "Roadmap"],
-  "Use Cases": [
-    "Coding Agents",
-    "Research",
-    "Data Analysis",
-    "Automation",
-    "Enterprise",
-  ],
-  Resources: [
-    "Documentation",
-    "API Reference",
-    "Blog",
-    "Community",
-    "Status",
-  ],
-  Company: ["About", "Careers", "Press", "Privacy", "Terms"],
-};
+const footerLinks = [
+  { label: "Care Guide", href: "#" },
+  { label: "Gift Card", href: "#" },
+  { label: "Stockists", href: "#" },
+  { label: "Delivery", href: "#" },
+  { label: "Returns Policy", href: "#" },
+  { label: "Clearpay", href: "#" },
+];
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-gray-100 bg-[#fafafa] py-20 px-8 md:px-16 lg:px-24">
+    <footer id="contact" className="bg-[#111111] text-white pt-16 pb-10 px-6 md:px-12 lg:px-20">
       <div className="max-w-screen-xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-16">
-          {/* Brand */}
-          <div className="lg:w-60 flex-shrink-0">
-            <div className="flex items-center gap-2.5 text-[#0d0d0d] mb-4">
-              <CevoMark />
-              <span className="font-display font-semibold text-[17px] tracking-tight">
-                CEVO
-              </span>
-            </div>
-            <p className="text-gray-400 text-[13px] font-sans leading-relaxed">
-              Build the next generation of software with agents that think, plan,
-              and act.
+        {/* Top */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+          {/* Logo + tagline */}
+          <div>
+            <Link
+              href="/"
+              className="font-light tracking-[0.35em] uppercase text-[22px] hover:text-[#b89a72] transition-colors"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              GAMZE
+            </Link>
+            <p className="mt-4 text-[12px] text-gray-500 leading-relaxed font-inter font-light max-w-xs">
+              Luxury bridal accessories, handcrafted in the finest materials
+              using artisan techniques.
             </p>
+            <div className="flex items-center gap-4 mt-6">
+              <a
+                href="https://instagram.com/gamzestudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-gray-500 hover:text-[#b89a72] transition-colors"
+              >
+                <Instagram className="w-[18px] h-[18px]" />
+              </a>
+              <a
+                href="https://facebook.com/gamzestudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-gray-500 hover:text-[#b89a72] transition-colors"
+              >
+                <Facebook className="w-[18px] h-[18px]" />
+              </a>
+            </div>
           </div>
 
-          {/* Link columns */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 flex-1">
-            {Object.entries(footerLinks).map(([category, links]) => (
-              <div key={category}>
-                <h4 className="font-display font-semibold text-[12.5px] text-[#0d0d0d] mb-4 tracking-tight">
-                  {category}
-                </h4>
-                <ul className="space-y-2.5">
-                  {links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-gray-400 text-[13px] font-sans hover:text-gray-700 transition-colors"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Links */}
+          <div>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-5 font-inter">
+              Information
+            </p>
+            <ul className="flex flex-col gap-3">
+              {footerLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-[12px] tracking-[0.1em] text-gray-400 hover:text-white transition-colors font-inter"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-[10px] tracking-[0.25em] uppercase text-gray-500 mb-5 font-inter">
+              Get in touch
+            </p>
+            <a
+              href="mailto:hello@gamzestudio.com"
+              className="text-[13px] text-gray-400 hover:text-white transition-colors font-inter"
+            >
+              hello@gamzestudio.com
+            </a>
+            <p className="mt-4 text-[12px] text-gray-600 leading-relaxed font-inter">
+              For bespoke enquiries, appointments and general questions — we
+              typically respond within 24 hours.
+            </p>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-gray-400 text-[12px] font-sans">
-            © 2025 CEVO. All rights reserved.
+        {/* Bottom */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
+          <p className="text-[11px] text-gray-600 font-inter tracking-[0.05em]">
+            © {new Date().getFullYear()} GAMZE Studio. All rights reserved.
           </p>
-          <p className="text-gray-300 text-[12px] font-sans">
-            Built for the agent-first era.
+          <p className="text-[11px] text-gray-700 font-inter">
+            Luxury bridal accessories for modern brides
           </p>
         </div>
       </div>

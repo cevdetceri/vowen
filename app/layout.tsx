@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-cormorant",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "CEVO — The Next-Gen Agent Platform",
+  title: "GAMZE Studio — Luxury Bridal Accessories",
   description:
-    "CEVO is our agentic development platform, allowing anyone to build in the agent-first era.",
+    "Luxury accessories for modern brides. Soft colour palettes, sculptural forms and intricate details, handcrafted in the finest materials using artisan techniques.",
+  openGraph: {
+    title: "GAMZE Studio — Luxury Bridal Accessories",
+    description: "Luxury accessories for modern brides.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +33,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${bricolage.variable} ${dmSans.variable} font-sans`}>
+      <body className={`${cormorant.variable} ${inter.variable} font-sans`}>
         {children}
       </body>
     </html>

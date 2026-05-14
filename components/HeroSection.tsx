@@ -2,88 +2,103 @@
 
 import { useEffect, useState } from "react";
 
-function CevoMark() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-      <path d="M10 7L42 24L10 41V31.5L30 24L10 16.5V7Z" fill="#0d0d0d" />
-    </svg>
-  );
-}
-
-function WindowsIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801" />
-    </svg>
-  );
-}
-
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 60);
+    const t = setTimeout(() => setMounted(true), 80);
     return () => clearTimeout(t);
   }, []);
 
   return (
-    <section className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6 pt-16 pb-16">
-      {/* Logo mark */}
-      <div
-        className={`flex items-center gap-3 mb-6 md:mb-10 transition-all duration-700 ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-        }`}
-        style={{ transitionDelay: "0ms" }}
-      >
-        <CevoMark />
-        <span className="text-[13px] md:text-[15px] font-sans font-medium text-gray-400 tracking-[0.2em] uppercase">
-          CEVO
-        </span>
-      </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden bg-[#111111]">
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 z-10" />
 
-      {/* Headline */}
-      <h1
-        className={`font-display font-extrabold leading-[1] md:leading-[0.9] tracking-tight text-[#0d0d0d] max-w-[900px] mb-7 md:mb-12 transition-all duration-700 ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-        }`}
+      {/* Background pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          fontSize: "clamp(2rem, 7vw, 6.5rem)",
-          transitionDelay: "80ms",
+          backgroundImage:
+            "repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%)",
+          backgroundSize: "20px 20px",
         }}
-      >
-        Experience liftoff with the next-gen agent platform
-      </h1>
+      />
 
-      {/* CTAs */}
-      <div
-        className={`flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto transition-all duration-700 ${
-          mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-        }`}
-        style={{ transitionDelay: "180ms" }}
-      >
-        <a
-          href="#try-cevo"
-          className="flex items-center justify-center gap-3 w-full sm:w-auto bg-[#0d0d0d] text-white px-7 py-3.5 md:px-8 md:py-4 rounded-full text-[14px] md:text-[15px] font-medium hover:bg-[#1a1a1a] transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-black/10"
+      {/* Content */}
+      <div className="relative z-20 px-6 max-w-3xl mx-auto">
+        <p
+          className={`text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-[#b89a72] mb-8 font-inter transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: "0ms" }}
         >
-          <WindowsIcon />
-          Download for Windows
-        </a>
-        <a
-          href="#features"
-          className="flex items-center justify-center w-full sm:w-auto px-7 py-3.5 md:px-8 md:py-4 rounded-full border border-gray-300 text-[14px] md:text-[15px] font-medium text-gray-600 hover:bg-white/60 hover:border-gray-400 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          GAMZE Studio
+        </p>
+
+        <h1
+          className={`font-cormorant text-white leading-[1.05] mb-8 transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          }`}
+          style={{
+            fontFamily: "var(--font-cormorant)",
+            fontSize: "clamp(2.4rem, 6vw, 5rem)",
+            fontWeight: 300,
+            letterSpacing: "0.02em",
+            transitionDelay: "120ms",
+          }}
         >
-          Explore use cases
-        </a>
+          luxury accessories
+          <br />
+          <em>for modern brides</em>
+        </h1>
+
+        <p
+          className={`text-[13px] md:text-[14px] text-gray-300 leading-relaxed mb-4 font-inter font-light transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: "240ms" }}
+        >
+          soft colour palettes, sculptural forms and intricate details
+        </p>
+        <p
+          className={`text-[13px] md:text-[14px] text-gray-400 leading-relaxed mb-12 font-inter font-light transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: "320ms" }}
+        >
+          handcrafted in the finest materials, using artisan techniques
+        </p>
+
+        <div
+          className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-1000 ${
+            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+          style={{ transitionDelay: "440ms" }}
+        >
+          <a
+            href="#shop"
+            className="w-full sm:w-auto px-10 py-3.5 bg-white text-[#111] text-[11px] tracking-[0.2em] uppercase font-inter hover:bg-[#b89a72] hover:text-white transition-all duration-300"
+          >
+            Shop Now
+          </a>
+          <a
+            href="#appointments"
+            className="w-full sm:w-auto px-10 py-3.5 border border-white/40 text-white text-[11px] tracking-[0.2em] uppercase font-inter hover:border-[#b89a72] hover:text-[#b89a72] transition-all duration-300"
+          >
+            Book Appointment
+          </a>
+        </div>
       </div>
 
-      {/* Scroll line */}
+      {/* Scroll indicator */}
       <div
-        className={`absolute bottom-10 flex flex-col items-center gap-0 transition-all duration-700 ${
+        className={`absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-1000 ${
           mounted ? "opacity-100" : "opacity-0"
         }`}
-        style={{ transitionDelay: "400ms" }}
+        style={{ transitionDelay: "700ms" }}
       >
-        <div className="w-px h-14 bg-gradient-to-b from-gray-300 to-transparent" />
+        <span className="text-[9px] tracking-[0.3em] uppercase text-gray-500 font-inter">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-gray-500 to-transparent" />
       </div>
     </section>
   );

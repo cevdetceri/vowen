@@ -3,13 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --bg: #fafafa;
-  --fg: #0d0d0d;
-  --blue: #2563eb;
+  --color-bg: #faf8f5;
+  --color-dark: #111111;
+  --color-text: #1e1e1e;
+  --color-muted: #7a7570;
+  --color-gold: #b89a72;
+  --color-border: #e5e0d8;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -17,36 +22,23 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-/* Prompt box textarea scrollbar */
-textarea::-webkit-scrollbar {
-  width: 6px;
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4cfc8 transparent;
 }
-textarea::-webkit-scrollbar-track {
-  background: transparent;
-}
-textarea::-webkit-scrollbar-thumb {
-  background-color: #444444;
-  border-radius: 3px;
-}
-textarea::-webkit-scrollbar-thumb:hover {
-  background-color: #555555;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d4cfc8; border-radius: 3px; }
 
-/* Global scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
-  border-radius: 3px;
+::selection {
+  background: #e8ddd0;
+  color: #111;
 }
